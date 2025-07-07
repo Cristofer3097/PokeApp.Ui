@@ -40,13 +40,13 @@
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\app.js'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-LpNo9Y4qmrzVI/2iTigQleTWc5oCwLuZ3tWJF2JcYKA="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"15397"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022LpNo9Y4qmrzVI/2iTigQleTWc5oCwLuZ3tWJF2JcYKA=\u0022"},{"Name":"Last-Modified","Value":"Mon, 07 Jul 2025 17:06:39 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"15397"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022LpNo9Y4qmrzVI/2iTigQleTWc5oCwLuZ3tWJF2JcYKA=\u0022"},{"Name":"Last-Modified","Value":"Mon, 07 Jul 2025 17:08:11 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/PokeApp.Ui/js/app.m31l8rmrgo.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\app.js'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"m31l8rmrgo"},{"Name":"integrity","Value":"sha256-LpNo9Y4qmrzVI/2iTigQleTWc5oCwLuZ3tWJF2JcYKA="},{"Name":"label","Value":"_content/PokeApp.Ui/js/app.js"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"15397"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022LpNo9Y4qmrzVI/2iTigQleTWc5oCwLuZ3tWJF2JcYKA=\u0022"},{"Name":"Last-Modified","Value":"Mon, 07 Jul 2025 17:06:39 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"15397"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022LpNo9Y4qmrzVI/2iTigQleTWc5oCwLuZ3tWJF2JcYKA=\u0022"},{"Name":"Last-Modified","Value":"Mon, 07 Jul 2025 17:08:11 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/PokeApp.Ui/js/site.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\site.js'))</AssetFile>
