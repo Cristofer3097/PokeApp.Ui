@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokeApp.Ui", "PokeApp.Ui.csproj", "{9A78F99B-1A23-19B4-73DA-94981EBE8883}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokeApp.Api", "..\PokeApp.Api\PokeApp.Api.csproj", "{79198378-A8F2-D940-AF2D-3293C950B036}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9A78F99B-1A23-19B4-73DA-94981EBE8883}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A78F99B-1A23-19B4-73DA-94981EBE8883}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A78F99B-1A23-19B4-73DA-94981EBE8883}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A78F99B-1A23-19B4-73DA-94981EBE8883}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79198378-A8F2-D940-AF2D-3293C950B036}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79198378-A8F2-D940-AF2D-3293C950B036}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79198378-A8F2-D940-AF2D-3293C950B036}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79198378-A8F2-D940-AF2D-3293C950B036}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7CA86584-1FC0-40C5-BA63-662274AAFA58}
+	EndGlobalSection
+EndGlobal

@@ -1,6 +1,8 @@
-/* Importante: Necesitar·s tus propias im·genes para los fondos y botones */
+Ôªø/* Reemplaza el contenido de tu pokedex-style.css con esto */
+
+/* Estilo para el fondo de toda la p√°gina */
 body {
-    background-color: #007bff;
+    background-color: #007bff; /* Un azul similar al de la referencia */
     background-image: linear-gradient(to bottom, #007bff, #0056b3);
     display: flex;
     justify-content: center;
@@ -15,9 +17,9 @@ body {
 #pokedex-container {
     display: flex;
     width: 100%;
-    max-width: 950px; /* Ancho m·ximo */
+    max-width: 950px; /* Ancho m√°ximo */
     height: 100%;
-    max-height: 700px; /* Alto m·ximo */
+    max-height: 700px; /* Alto m√°ximo */
     background: url('../assets/images/pokedex-background.png') no-repeat center center;
     background-size: cover; /* Cambiado a 'cover' para que llene el contenedor */
     padding: 55px 40px; /* Ajuste del padding para que encaje mejor */
@@ -37,10 +39,10 @@ body {
     background-color: #98cb98;
     border: 20px solid #494949;
     border-radius: 10px;
-    height: 60%;
+    height: 350px;
     padding: 15px;
     text-align: center;
-    overflow-y: auto;
+    overflow-y: auto; /* Scroll si el contenido es muy largo */
 }
 
 #pokemon-details-content .placeholder-text {
@@ -48,7 +50,8 @@ body {
 }
 
 #pokemon-details-content img {
-    max-height: 180px;
+    max-height: 200px;
+    width: auto; /* Para mantener la proporci√≥n */
     margin: 10px auto;
     display: block;
 }
@@ -56,16 +59,19 @@ body {
 #pokemon-details-content h3 {
     text-transform: capitalize;
     font-size: 1em;
-    margin-top: 5px
+    margin-top: 5px;
 }
+
 #pokemon-details-content p {
     font-size: 0.7em;
     line-height: 1.5;
 }
+
 #details-buttons {
     margin-top: 20px;
     text-align: center;
 }
+
     #details-buttons button {
         font-family: 'Press Start 2P', cursive;
         font-size: 0.6em;
@@ -74,6 +80,7 @@ body {
         border-radius: 5px;
         cursor: pointer;
     }
+
 
 /* --- Panel Derecho --- */
 #right-panel {
@@ -85,32 +92,37 @@ body {
 
 #pokedex-header {
     text-align: center;
-    padding-top: 10px;
+    padding-top: 10px; /* Espacio para el logo */
 }
+
 #pokedex-logo {
     width: 200px;
     margin-bottom: 20px; /* Espacio debajo del logo */
 }
+
 #filters {
     margin-bottom: 10px;
 }
-#filters input, #filters select, #action-buttons button {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 0.6em;
-    padding: 5px;
-    margin: 2px;
-    border: 2px solid #333;
-    border-radius: 5px;
-}
+
+    #filters input, #filters select, #action-buttons button {
+        font-family: 'Press Start 2P', cursive;
+        font-size: 0.6em;
+        padding: 5px;
+        margin: 2px;
+        border: 2px solid #333;
+        border-radius: 5px;
+    }
+
 #action-buttons button {
     cursor: pointer;
 }
+
 #pokemon-list {
     list-style: none;
     padding: 0;
     margin-top: 10px;
     height: 300px; /* Altura fija para la lista */
-    overflow-y: scroll; /* Scroll vertical */
+    overflow-y: scroll;
     background-color: #f0f0f0;
     border: 2px solid #333;
     border-radius: 5px;
@@ -124,16 +136,21 @@ body {
         align-items: center;
         font-size: 0.8em;
     }
-    #pokemon-list li:hover { background-color: #ddd; }
-    #pokemon-list li.selected { background-color: #f0a0a0; }
-    #pokemon-list li img { margin-right: 10px; width: 40px; height: 40px; }
-    #pokemon-list::-webkit-scrollbar { width: 10px; }
-    #pokemon-list::-webkit-scrollbar-track { background: #f0f0f0; }
-    #pokemon-list::-webkit-scrollbar-thumb { background: #888; border-radius: 5px; }
-    #pokemon-list::-webkit-scrollbar-thumb:hover { background: #555; }
-        
 
-    /* Scrollbar personalizado */
+        #pokemon-list li:hover {
+            background-color: #ddd;
+        }
+
+        #pokemon-list li.selected {
+            background-color: #f0a0a0;
+        }
+
+        #pokemon-list li img {
+            margin-right: 10px;
+            width: 40px;
+            height: 40px;
+        }
+
     #pokemon-list::-webkit-scrollbar {
         width: 10px;
     }
@@ -152,30 +169,18 @@ body {
         }
 
 
-/* --- PaginaciÛn y Footer --- */
+/* --- Paginaci√≥n --- */
 #pagination-container {
-    margin-top: auto;
+    margin-top: 10px;
 }
 
 .pagination {
     font-size: 0.7em;
     justify-content: center;
-    --bs-pagination-active-bg: #c03028; /* Rojo para p·gina activa */
+    --bs-pagination-active-bg: #c03028; /* Rojo para p√°gina activa */
     --bs-pagination-active-border-color: #333;
     --bs-pagination-color: #c03028;
     --bs-pagination-hover-color: #c03028;
     --bs-link-color: #c03028;
     --bs-link-hover-color: #c03028;
 }
-
-#pokedex-footer {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-    #pokedex-footer button, #pokedex-footer a {
-        font-family: 'Press Start 2P', cursive;
-        /* ... m·s estilos para los botones del footer ... */
-    }

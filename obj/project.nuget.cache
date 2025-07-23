@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "0Nqw3FZTQqw=",
+  "dgSpecHash": "6T71TUcdFLo=",
   "success": true,
   "projectFilePath": "C:\\Users\\Abel\\Documents\\Github\\PokeApp.Ui\\PokeApp.Ui.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Abel\\.nuget\\packages\\microsoft.net.sdk.compilers.toolset\\9.0.303\\microsoft.net.sdk.compilers.toolset.9.0.303.nupkg.sha512"
+  ],
   "logs": []
 }

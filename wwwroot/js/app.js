@@ -1,27 +1,84 @@
-const apiBaseUrl = 'https://localhost:7118/api'; 
+ï»¿const apiBaseUrl = 'https://localhost:7118/api'; 
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    
-    const pokemonTableBody = document.getElementById('pokemon-table-body');
+    const apiBaseUrl = 'https://localhost:7118/api/pokemon';
+
+    const pokemonList = document.getElementById('pokemon-list');
     const paginationControls = document.getElementById('pagination-controls');
-    const filterForm = document.getElementById('filter-form');
     const nameFilterInput = document.getElementById('nameFilter');
     const speciesFilterSelect = document.getElementById('speciesFilter');
+
+    // Botones
+    const filterBtn = document.getElementById('filter-btn');
     const clearFiltersBtn = document.getElementById('clear-filters-btn');
     const exportBtn = document.getElementById('export-excel-btn');
+    const emailListBtn = document.getElementById('email-list-btn');
+
+    // Panel de detalles
+    const detailsContent = document.getElementById('pokemon-details-content');
+    const detailsButtons = document.getElementById('details-buttons');
+
+    // Modal y formulario de correo
+    const emailModal = new bootstrap.Modal(document.getElementById('sendEmailModal'));
     const emailForm = document.getElementById('send-email-form');
 
     let currentPage = 1;
-    let currentNameFilter = '';
-    let currentSpeciesFilter = 'all';
+    let currentPokemons = [];
+    let selectedPokemonLi = null;
 
+
+    async function loadPokemons(page = 1, name = '', species = 'all') {
+        pokemonList.innerHTML = '<li class="placeholder-text" style="justify-content: center; padding: 20px;">Cargando...</li>';
+        const url = `${apiBaseUrl}?page=${page}&limit=20&nameFilter=${name}&speciesFilter=${species}`;
+
+        // El bloque 'try' debe ir seguido de un bloque 'catch'
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+
+            const data = await response.json();
+            currentPokemons = data.results;
+            pokemonList.innerHTML = '';
+
+            if (currentPokemons.length === 0) {
+                pokemonList.innerHTML = '<li class="placeholder-text" style="justify-content: center; padding: 20px;">No se encontraron PokÃ©mon.</li>';
+                setupPagination(0, 1);
+                return;
+            }
+
+            currentPokemons.forEach(pokemon => {
+                const listItem = document.createElement('li');
+                listItem.dataset.pokemonName = pokemon.name;
+                listItem.innerHTML = `
+                <img src="${pokemon.sprites?.front_default || ''}" alt="${pokemon.name}" style="width: 40px; height: 40px; margin-right: 10px;">
+                <span>No. ${String(pokemon.id).padStart(3, '0')}</span>
+                <span style="margin-left: auto; text-transform: capitalize;">${pokemon.name}</span>
+            `;
+
+                listItem.addEventListener('click', () => {
+                    showDetails(pokemon);
+                    if (selectedPokemonLi) selectedPokemonLi.classList.remove('selected');
+                    listItem.classList.add('selected');
+                    selectedPokemonLi = listItem;
+                });
+
+                pokemonList.appendChild(listItem);
+            });
+
+            setupPagination(data.totalPages, data.currentPage);
+
+        } catch (error) { // Este bloque 'catch' es el que faltaba o estaba incorrecto
+            console.error('No se pudieron cargar los PokÃ©mon:', error);
+            pokemonList.innerHTML = `<li class="placeholder-text" style="color: red; justify-content: center; padding: 20px;">${error.message}</li>`;
+        }
+    }
 
     async function loadPokemonTypes() {
         try {
-            const response = await fetch(`${apiBaseUrl}/pokemon/types`);
+            const response = await fetch(`${apiBaseUrl}/types`);
             const types = await response.json();
-            speciesFilterSelect.innerHTML = '<option value="all">Todas</option>'; // Limpia y añade la opción por defecto
+            speciesFilterSelect.innerHTML = '<option value="all">Todas</option>';
             types.forEach(type => {
                 const option = document.createElement('option');
                 option.value = type.name;
@@ -29,326 +86,170 @@ document.addEventListener('DOMContentLoaded', () => {
                 speciesFilterSelect.appendChild(option);
             });
         } catch (error) {
-            console.error('Error al cargar los tipos de Pokémon:', error);
+            console.error('Error al cargar los tipos de PokÃ©mon:', error);
         }
     }
 
-    // Función para cargar los Pokémon
-    async function loadPokemons(page = 1, name = '', species = 'all') {
-        pokemonTableBody.innerHTML = '<tr><td colspan="4" class="text-center">Cargando...</td></tr>';
+    // --- MOSTRAR DETALLES ---
 
-        // Construye la URL con los parámetros
-        const url = `${apiBaseUrl}/pokemon?page=${page}&limit=20&nameFilter=${name}&speciesFilter=${species}`;
+    function showDetails(pokemon) {
+        // Esta funciÃ³n recibe el objeto PokÃ©mon completo desde la lista
 
-        try {
-            const response = await fetch(url);
-            if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+        // Esta lÃ­nea usa los datos que tu captura demuestra que son correctos
+        const imageUrl = pokemon.sprites?.other?.officialArtwork?.frontDefault || pokemon.sprites?.frontDefault || '';
+        const typesString = pokemon.types.map(t => t.type.name).join(', ');
+        const description = pokemon.description || 'DescripciÃ³n no disponible.';
 
-            const data = await response.json();
-            pokemonTableBody.innerHTML = ''; // Limpia la tabla
+        // Se construye el HTML para el panel de detalles
+        detailsContent.innerHTML = `
+        <img src="${imageUrl}" alt="${pokemon.name}" style="image-rendering: pixelated; height: 180px; width: auto;">
+        <h3 class="text-capitalize">${pokemon.name} (#${pokemon.id})</h3>
+        <p><strong>Tipo:</strong> ${typesString}</p>
+        <p>${description}</p>
+    `;
 
-            if (data.results.length === 0) {
-                pokemonTableBody.innerHTML = '<tr><td colspan="4" class="text-center">No se encontraron Pokémon.</td></tr>';
-            }
-
-            data.results.forEach(pokemon => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td><img src="${pokemon.sprites?.frontDefault ?? ''}" alt="${pokemon.name}" width="50"></td>
-                    <td>${pokemon.name}</td>
-                    <td>${pokemon.types.map(t => t.type.name).join(', ')}</td>
-                    <td><button class="btn btn-sm btn-info" onclick="showDetails('${pokemon.name}')">Detalles</button></td>
-                `;
-                pokemonTableBody.appendChild(row);
+        // Se limpian y se crean los botones de acciÃ³n
+        detailsButtons.innerHTML = '';
+        const sendEmailBtn = document.createElement('button');
+        sendEmailBtn.textContent = 'Enviar a Correo';
+        sendEmailBtn.addEventListener('click', () => {
+            prepareEmailModal({
+                pokemonName: pokemon.name,
+                pokemonId: pokemon.id,
+                pokemonTypes: typesString,
+                pokemonImage: imageUrl,
+                subject: `Detalles de ${pokemon.name}`
             });
-
-            setupPagination(data.totalPages, data.currentPage);
-
-        } catch (error) {
-            console.error('No se pudieron cargar los Pokémon:', error);
-            pokemonTableBody.innerHTML = '<tr><td colspan="4" class="text-center">Error al cargar los datos.</td></tr>';
-        }
-    }
-
-    // Función para dibujar los controles de paginación
-    function setupPagination(totalPages, currentPage) {
-        paginationControls.innerHTML = '';
-        if (totalPages <= 1) return;
-
-        const maxPagesToShow = 10; // Ajusta cuántos números de página mostrar
-        let startPage;
-        let endPage;
-
-        if (totalPages <= maxPagesToShow) {
-            // Muestra todas las páginas si no son muchas
-            startPage = 1;
-            endPage = totalPages;
-        } else {
-            // Calcula el rango de páginas a mostrar alrededor de la actual
-            const maxPagesBeforeCurrent = Math.floor(maxPagesToShow / 2);
-            const maxPagesAfterCurrent = Math.ceil(maxPagesToShow / 2) - 1;
-            if (currentPage <= maxPagesBeforeCurrent) {
-                startPage = 1;
-                endPage = maxPagesToShow;
-            } else if (currentPage + maxPagesAfterCurrent >= totalPages) {
-                startPage = totalPages - maxPagesToShow + 1;
-                endPage = totalPages;
-            } else {
-                startPage = currentPage - maxPagesBeforeCurrent;
-                endPage = currentPage + maxPagesAfterCurrent;
-            }
-        }
-
-        // Elementos de la paginación ---
-
-        // Botón "Anterior"
-        let liPrev = document.createElement('li');
-        liPrev.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
-        let aPrev = document.createElement('a');
-        aPrev.className = 'page-link';
-        aPrev.href = '#';
-        aPrev.textContent = 'Anterior';
-        aPrev.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (currentPage > 1) {
-                loadPokemons(currentPage - 1, currentNameFilter, currentSpeciesFilter);
-            }
-        });
-        liPrev.appendChild(aPrev);
-        paginationControls.appendChild(liPrev);
-
-        // Primera página
-        if (startPage > 1) {
-            let liFirst = document.createElement('li');
-            liFirst.className = 'page-item';
-            let aFirst = document.createElement('a');
-            aFirst.className = 'page-link';
-            aFirst.href = '#';
-            aFirst.textContent = '1';
-            aFirst.addEventListener('click', (e) => {
-                e.preventDefault();
-                loadPokemons(1, currentNameFilter, currentSpeciesFilter);
-            });
-            liFirst.appendChild(aFirst);
-            paginationControls.appendChild(liFirst);
-
-            if (startPage > 2) {
-                let liEllipsis = document.createElement('li');
-                liEllipsis.className = 'page-item disabled';
-                liEllipsis.innerHTML = '<span class="page-link">...</span>';
-                paginationControls.appendChild(liEllipsis);
-            }
-        }
-
-        // Números de página en el rango
-        for (let i = startPage; i <= endPage; i++) {
-            const li = document.createElement('li');
-            li.className = `page-item ${i === currentPage ? 'active' : ''}`;
-            const a = document.createElement('a');
-            a.className = 'page-link';
-            a.href = '#';
-            a.textContent = i;
-            if (i !== currentPage) {
-                a.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    loadPokemons(i, currentNameFilter, currentSpeciesFilter);
-                });
-            }
-            li.appendChild(a);
-            paginationControls.appendChild(li);
-        }
-
-        // Ultima página
-        if (endPage < totalPages) {
-            if (endPage < totalPages - 1) {
-                let liEllipsis = document.createElement('li');
-                liEllipsis.className = 'page-item disabled';
-                liEllipsis.innerHTML = '<span class="page-link">...</span>';
-                paginationControls.appendChild(liEllipsis);
-            }
-
-            let liLast = document.createElement('li');
-            liLast.className = 'page-item';
-            let aLast = document.createElement('a');
-            aLast.className = 'page-link';
-            aLast.href = '#';
-            aLast.textContent = totalPages;
-            aLast.addEventListener('click', (e) => {
-                e.preventDefault();
-                loadPokemons(totalPages, currentNameFilter, currentSpeciesFilter);
-            });
-            liLast.appendChild(aLast);
-            paginationControls.appendChild(liLast);
-        }
-
-        // Botón "Siguiente"
-        let liNext = document.createElement('li');
-        liNext.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
-        let aNext = document.createElement('a');
-        aNext.className = 'page-link';
-        aNext.href = '#';
-        aNext.textContent = 'Siguiente';
-        aNext.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (currentPage < totalPages) {
-                loadPokemons(currentPage + 1, currentNameFilter, currentSpeciesFilter);
-            }
-        });
-        liNext.appendChild(aNext);
-        paginationControls.appendChild(liNext);
-    }
-
-    // Evento para el formulario de filtrado
-    filterForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-        currentPage = 1; // Resetea a la primera página con cada nuevo filtro
-        currentNameFilter = nameFilterInput.value;
-        currentSpeciesFilter = speciesFilterSelect.value;
-        loadPokemons(currentPage, currentNameFilter, currentSpeciesFilter);
-    });
-
-    // Evento para el botón de limpiar filtros
-    clearFiltersBtn.addEventListener('click', () => {
-        currentPage = 1;
-        nameFilterInput.value = '';
-        speciesFilterSelect.value = 'all';
-        currentNameFilter = '';
-        currentSpeciesFilter = 'all';
-        loadPokemons(currentPage, currentNameFilter, currentSpeciesFilter);
-    });
-
-    
-    document.addEventListener('click', function (event) {
-        // Solo nos interesa si se hizo clic en nuestro botón específico
-        if (event.target && event.target.id === 'sendDetailsByEmailBtn') {
-
-            // 1. Obtener los datos del Pokémon desde los atributos del botón
-            const name = event.target.dataset.pokemonName;
-            const id = event.target.dataset.pokemonId;
-            const types = event.target.dataset.pokemonTypes;
-            const image = event.target.dataset.pokemonImage;
-
-            // 2. Encontrar el formulario del modal de correo
-            const emailForm = document.getElementById('send-email-form');
-
-            // 3. Llenar los campos ocultos del formulario con los datos del Pokémon
-            emailForm.querySelector('input[name="pokemonName"]').value = name;
-            emailForm.querySelector('input[name="pokemonId"]').value = id;
-            emailForm.querySelector('input[name="pokemonTypes"]').value = types;
-            emailForm.querySelector('input[name="pokemonImage"]').value = image;
-
-            // 4. (Opcional) Personalizar el asunto del correo
-            emailForm.querySelector('input[name="subject"]').value = `Detalles del Pokemon: ${name}`;
-
-            // 5. Cerrar el modal de detalles y abrir el de correo
-            const detailsModal = bootstrap.Modal.getInstance(document.getElementById('pokemonDetailsModal'));
-            detailsModal.hide();
-
-            const emailModal = new bootstrap.Modal(document.getElementById('sendEmailModal'));
             emailModal.show();
-        }
-    });
-    emailForm.addEventListener('submit', async (event) => {
-        event.preventDefault(); // Evita que la página se recargue
+        });
+        detailsButtons.appendChild(sendEmailBtn);
+    }
 
+
+    // --- LÃ“GICA DE CORREO ---
+
+    function prepareEmailModal(data = {}) {
+        emailForm.reset(); // Limpia el formulario
+        // Rellena los campos del formulario con los datos recibidos
+        emailForm.querySelector('[name="subject"]').value = data.subject || 'Lista de PokÃ©mon';
+        emailForm.querySelector('[name="pokemonName"]').value = data.pokemonName || '';
+        emailForm.querySelector('[name="pokemonId"]').value = data.pokemonId || '';
+        emailForm.querySelector('[name="pokemonTypes"]').value = data.pokemonTypes || '';
+        emailForm.querySelector('[name="pokemonImage"]').value = data.pokemonImage || '';
+    }
+
+    emailForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
         const submitButton = emailForm.querySelector('button[type="submit"]');
-        submitButton.disabled = true; // Deshabilita el botón para evitar envíos múltiples
+        submitButton.disabled = true;
         submitButton.textContent = 'Enviando...';
 
-        // Recolecta los datos del formulario
         const formData = new FormData(emailForm);
         const requestData = {
             emailAddress: formData.get('emailAddress'),
             subject: formData.get('subject'),
             body: formData.get('body'),
-            // Añade los datos del Pokémon si existen
             pokemonName: formData.get('pokemonName'),
             pokemonId: parseInt(formData.get('pokemonId')) || 0,
             pokemonTypes: formData.get('pokemonTypes'),
             pokemonImage: formData.get('pokemonImage'),
-            // Añade los filtros si existen
-            nameFilter: document.getElementById('nameFilter').value,
-            speciesFilter: document.getElementById('speciesFilter').value
+            nameFilter: nameFilterInput.value,
+            speciesFilter: speciesFilterSelect.value,
         };
 
         try {
-            const response = await fetch(`${apiBaseUrl}/pokemon/send-email`, {
+            const response = await fetch(`${apiBaseUrl}/send-email`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(requestData),
             });
-
             const result = await response.json();
-
-            if (!response.ok) {
-                throw new Error(result.message || 'Error en el servidor.');
-            }
-
-            alert(result.message); // Muestra mensaje de éxito
-            bootstrap.Modal.getInstance(document.getElementById('sendEmailModal')).hide(); // Cierra el modal
-
+            if (!response.ok) throw new Error(result.message);
+            alert('Â¡Correo enviado con Ã©xito!');
+            emailModal.hide();
         } catch (error) {
-            console.error('Error al enviar correo:', error);
-            alert(`Error: ${error.message}`); // Muestra mensaje de error
+            alert(`Error al enviar correo: ${error.message}`);
         } finally {
-            submitButton.disabled = false; // Vuelve a habilitar el botón
+            submitButton.disabled = false;
             submitButton.textContent = 'Enviar';
         }
     });
 
-    exportBtn.addEventListener('click', () => {
-        // Obtenemos los valores actuales de los filtros
-        const nameFilter = document.getElementById('nameFilter').value;
-        const speciesFilter = document.getElementById('speciesFilter').value;
+    // --- MANEJADORES DE EVENTOS ---
 
-        // Construimos la URL con los parámetros de consulta
-        const exportUrl = `${apiBaseUrl}/pokemon/export?nameFilter=${nameFilter}&speciesFilter=${speciesFilter}`;
-
-        // Redirigimos el navegador a la URL para iniciar la descarga
-        window.location.href = exportUrl;
+    filterBtn.addEventListener('click', () => {
+        currentPage = 1;
+        loadPokemons(currentPage, nameFilterInput.value, speciesFilterSelect.value);
     });
 
-    // Carga inicial
+    clearFiltersBtn.addEventListener('click', () => {
+        currentPage = 1;
+        nameFilterInput.value = '';
+        speciesFilterSelect.value = 'all';
+        loadPokemons(currentPage, '', 'all');
+        detailsContent.innerHTML = '<p class="placeholder-text">Selecciona un PokÃ©mon de la lista...</p>';
+        detailsButtons.innerHTML = '';
+    });
+
+    exportBtn.addEventListener('click', () => {
+        const name = nameFilterInput.value;
+        const species = speciesFilterSelect.value;
+        window.location.href = `${apiBaseUrl}/export?nameFilter=${name}&speciesFilter=${species}`;
+    });
+
+    emailListBtn.addEventListener('click', () => {
+        prepareEmailModal({ subject: 'Lista filtrada de PokÃ©mon' });
+    });
+
+    paginationControls.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') {
+            const page = e.target.dataset.page;
+            if (page) {
+                loadPokemons(parseInt(page), nameFilterInput.value, speciesFilterSelect.value);
+            }
+        }
+    });
+
+    // --- PAGINACIÃ“N --- (FunciÃ³n mejorada)
+
+    function setupPagination(totalPages, page) {
+        paginationControls.innerHTML = '';
+        currentPage = page;
+
+        // BotÃ³n "Anterior"
+        const prevLi = document.createElement('li');
+        prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+        prevLi.innerHTML = `<a class="page-link" href="#" data-page="${currentPage - 1}">Ant</a>`;
+        paginationControls.appendChild(prevLi);
+
+        // NÃºmeros de pÃ¡gina
+        for (let i = 1; i <= totalPages; i++) {
+            if (i === currentPage) {
+                const li = document.createElement('li');
+                li.className = 'page-item active';
+                li.innerHTML = `<span class="page-link">${i}</span>`;
+                paginationControls.appendChild(li);
+            } else if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) {
+                const li = document.createElement('li');
+                li.className = 'page-item';
+                li.innerHTML = `<a class="page-link" href="#" data-page="${i}">${i}</a>`;
+                paginationControls.appendChild(li);
+            } else if (i === currentPage - 3 || i === currentPage + 3) {
+                const li = document.createElement('li');
+                li.className = 'page-item disabled';
+                li.innerHTML = `<span class="page-link">...</span>`;
+                paginationControls.appendChild(li);
+            }
+        }
+
+        // BotÃ³n "Siguiente"
+        const nextLi = document.createElement('li');
+        nextLi.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
+        nextLi.innerHTML = `<a class="page-link" href="#" data-page="${currentPage + 1}">Sig</a>`;
+        paginationControls.appendChild(nextLi);
+    }
+
+    // --- Carga Inicial ---
     loadPokemonTypes();
     loadPokemons();
 });
-
-// Función para mostrar detalles (ejemplo)
-async function showDetails(pokemonName) {
-    try {
-        const response = await fetch(`${apiBaseUrl}/pokemon/${pokemonName}`);
-        if (!response.ok) throw new Error('No se encontró el Pokémon.');
-        const pokemon = await response.json();
-
-        // Ahora usamos 'pokemon.description' que viene de la API
-        const detailsBody = `
-            <h3>${pokemon.name}</h3>
-            <img src="${pokemon.sprites?.frontDefault}" alt="${pokemon.name}" class="img-fluid" />
-            <p><strong>ID:</strong> ${pokemon.id}</p>
-            <p><strong>Especie:</strong> ${pokemon.types.map(t => t.type.name).join(', ')}</p>
-            <p><strong>Descripcion:</strong> ${pokemon.description}</p> 
-        `; // <-- LÍNEA ACTUALIZADA
-
-        const detailsFooter = `
-    <button type="button" class="btn btn-primary" id="sendDetailsByEmailBtn" 
-            data-pokemon-name="${pokemon.name}" 
-            data-pokemon-id="${pokemon.id}"
-            data-pokemon-types="${pokemon.types.map(t => t.type.name).join(', ')}"
-            data-pokemon-image="${pokemon.sprites?.frontDefault ?? ''}">
-        Enviar a Correo
-    </button>
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-`;
-
-        document.getElementById('pokemonDetailsBody').innerHTML = detailsBody;
-        document.getElementById('pokemonDetailsFooter').innerHTML = detailsFooter;
-
-        const detailsModal = new bootstrap.Modal(document.getElementById('pokemonDetailsModal'));
-        detailsModal.show();
-    } catch (error) {
-        console.error('Error al cargar detalles:', error);
-        alert('No se pudieron cargar los detalles del Pokémon.');
-    }
-}
