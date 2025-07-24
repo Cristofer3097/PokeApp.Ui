@@ -100,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const typesString = pokemon.types.map(t => t.type.name).join(', ');
         const description = pokemon.description || 'Descripción no disponible.';
 
+
         // Se construye el HTML para el panel de detalles
         detailsContent.innerHTML = `
         <img src="${imageUrl}" alt="${pokemon.name}" style="image-rendering: pixelated; height: 180px; width: auto;">
