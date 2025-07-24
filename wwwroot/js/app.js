@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Esta función recibe el objeto Pokémon completo desde la lista
 
         // Esta línea usa los datos que tu captura demuestra que son correctos
-        const imageUrl = pokemon.sprites?.other?.officialArtwork?.frontDefault || pokemon.sprites?.frontDefault || '';
+        const imageUrl = pokemon.sprites?.other?.['official-artwork']?.front_default || pokemon.sprites?.front_default || '';
         const typesString = pokemon.types.map(t => t.type.name).join(', ');
         const description = pokemon.description || 'Descripción no disponible.';
 
@@ -252,4 +252,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Carga Inicial ---
     loadPokemonTypes();
     loadPokemons();
-});
+}
+);
