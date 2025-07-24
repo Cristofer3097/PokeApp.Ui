@@ -93,20 +93,32 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- MOSTRAR DETALLES ---
 
     function showDetails(pokemon) {
-        // Esta función recibe el objeto Pokémon completo desde la lista
-
-        // Esta línea usa los datos que tu captura demuestra que son correctos
-        const imageUrl = pokemon.sprites?.other?.['official-artwork']?.front_default || pokemon.sprites?.front_default || '';
+        
+        // Intenta obtener el gif animado de Black/White
+        const bwGif = pokemon.sprites?.versions?.['generation-v']?.['black-white']?.animated?.front_default;
+        // Si no existe, usa el sprite oficial/artwork o el default
+        const imageUrl = bwGif
+            || pokemon.sprites?.other?.['official-artwork']?.front_default
+            || pokemon.sprites?.front_default
+            || '';
         const typesString = pokemon.types.map(t => t.type.name).join(', ');
         const description = pokemon.description || 'Descripción no disponible.';
 
 
         // Se construye el HTML para el panel de detalles
         detailsContent.innerHTML = `
-        <img src="${imageUrl}" alt="${pokemon.name}" style="image-rendering: pixelated; height: 180px; width: auto;">
+        <img src="${imageUrl}" alt="${pokemon.name}" style="image-rendering: pixelated; height: 160px; width: auto;">
         <h3 class="text-capitalize">${pokemon.name} (#${pokemon.id})</h3>
         <p><strong>Tipo:</strong> ${typesString}</p>
-        <p>${description}</p>
+
+        <div class="stats-grid">
+            <div class="stat-item"><strong>Altura</strong></div>
+            <div class="stat-value">${pokemon.height}"</div>
+            <div class="stat-item"><strong>Peso</strong></div>
+            <div class="stat-value">${pokemon.weight} lbs</div>
+        </div>
+
+        <p class="description-text">${description}</p>
     `;
 
         // Se limpian y se crean los botones de acción

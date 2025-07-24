@@ -18,10 +18,11 @@ C:\Users\Abel\Documents\Github\PokeApp.Ui\obj\Debug\net9.0\rjimswa.dswa.cache.js
 C:\Users\Abel\Documents\Github\PokeApp.Ui\obj\Debug\net9.0\rjsmrazor.dswa.cache.json
 C:\Users\Abel\Documents\Github\PokeApp.Ui\obj\Debug\net9.0\rjsmcshtml.dswa.cache.json
 C:\Users\Abel\Documents\Github\PokeApp.Ui\obj\Debug\net9.0\scopedcss\bundle\PokeApp.Ui.styles.css
-C:\Users\Abel\Documents\Github\PokeApp.Ui\obj\Debug\net9.0\compressed\kk8mtpai22-rgcgl9qnwq.gz
+C:\Users\Abel\Documents\Github\PokeApp.Ui\obj\Debug\net9.0\compressed\kk8mtpai22-mz5xs12tul.gz
 C:\Users\Abel\Documents\Github\PokeApp.Ui\obj\Debug\net9.0\compressed\yf3kjiegmu-semayfc2kw.gz
 C:\Users\Abel\Documents\Github\PokeApp.Ui\obj\Debug\net9.0\compressed\l9dt8o5s69-61n19gt1b8.gz
 C:\Users\Abel\Documents\Github\PokeApp.Ui\obj\Debug\net9.0\compressed\thm9ju1gst-bu3osswp1i.gz
+C:\Users\Abel\Documents\Github\PokeApp.Ui\obj\Debug\net9.0\compressed\sgsg2gizsg-ij8hfr1y5u.gz
 C:\Users\Abel\Documents\Github\PokeApp.Ui\obj\Debug\net9.0\compressed\kuuhjh7pf4-xtxxf3hu2r.gz
 C:\Users\Abel\Documents\Github\PokeApp.Ui\obj\Debug\net9.0\compressed\ggec3ivnrt-nakmwdwsxp.gz
 C:\Users\Abel\Documents\Github\PokeApp.Ui\obj\Debug\net9.0\compressed\949xwz0w8l-st1cbwfwo5.gz
@@ -89,4 +90,3 @@ C:\Users\Abel\Documents\Github\PokeApp.Ui\obj\Debug\net9.0\refint\PokeApp.Ui.dll
 C:\Users\Abel\Documents\Github\PokeApp.Ui\obj\Debug\net9.0\PokeApp.Ui.pdb
 C:\Users\Abel\Documents\Github\PokeApp.Ui\obj\Debug\net9.0\PokeApp.Ui.genruntimeconfig.cache
 C:\Users\Abel\Documents\Github\PokeApp.Ui\obj\Debug\net9.0\ref\PokeApp.Ui.dll
-C:\Users\Abel\Documents\Github\PokeApp.Ui\obj\Debug\net9.0\compressed\sgsg2gizsg-v6iq5colrk.gz
