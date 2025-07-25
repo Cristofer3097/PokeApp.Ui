@@ -3,31 +3,22 @@
   "WorkspaceRootPath": "C:\\Users\\Abel\\Documents\\Github\\PokeApp.Ui\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{79198378-A8F2-D940-AF2D-3293C950B036}|..\\PokeApp.Api\\PokeApp.Api.csproj|c:\\users\\abel\\documents\\github\\pokeapp.api\\controllers\\pokemonapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{79198378-A8F2-D940-AF2D-3293C950B036}|..\\PokeApp.Api\\PokeApp.Api.csproj|c:\\users\\abel\\documents\\github\\pokeapp.api\\models\\pokemon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9A78F99B-1A23-19B4-73DA-94981EBE8883}|PokeApp.Ui.csproj|c:\\users\\abel\\documents\\github\\pokeapp.ui\\wwwroot\\css\\pokedex-style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{9A78F99B-1A23-19B4-73DA-94981EBE8883}|PokeApp.Ui.csproj|solutionrelative:wwwroot\\css\\pokedex-style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9A78F99B-1A23-19B4-73DA-94981EBE8883}|PokeApp.Ui.csproj|c:\\users\\abel\\documents\\github\\pokeapp.ui\\wwwroot\\js\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{9A78F99B-1A23-19B4-73DA-94981EBE8883}|PokeApp.Ui.csproj|solutionrelative:wwwroot\\js\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{79198378-A8F2-D940-AF2D-3293C950B036}|..\\PokeApp.Api\\PokeApp.Api.csproj|c:\\users\\abel\\documents\\github\\pokeapp.api\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9A78F99B-1A23-19B4-73DA-94981EBE8883}|PokeApp.Ui.csproj|c:\\users\\abel\\documents\\github\\pokeapp.ui\\wwwroot\\css\\pokedex-style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{9A78F99B-1A23-19B4-73DA-94981EBE8883}|PokeApp.Ui.csproj|solutionrelative:wwwroot\\css\\pokedex-style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{79198378-A8F2-D940-AF2D-3293C950B036}|..\\PokeApp.Api\\PokeApp.Api.csproj|c:\\users\\abel\\documents\\github\\pokeapp.api\\services\\pokeapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{9A78F99B-1A23-19B4-73DA-94981EBE8883}|PokeApp.Ui.csproj|c:\\users\\abel\\documents\\github\\pokeapp.ui\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{9A78F99B-1A23-19B4-73DA-94981EBE8883}|PokeApp.Ui.csproj|solutionrelative:wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{79198378-A8F2-D940-AF2D-3293C950B036}|..\\PokeApp.Api\\PokeApp.Api.csproj|c:\\users\\abel\\documents\\github\\pokeapp.api\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{79198378-A8F2-D940-AF2D-3293C950B036}|..\\PokeApp.Api\\PokeApp.Api.csproj|c:\\users\\abel\\documents\\github\\pokeapp.api\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79198378-A8F2-D940-AF2D-3293C950B036}|..\\PokeApp.Api\\PokeApp.Api.csproj|c:\\users\\abel\\documents\\github\\pokeapp.api\\services\\pokeapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9A78F99B-1A23-19B4-73DA-94981EBE8883}|PokeApp.Ui.csproj|c:\\users\\abel\\documents\\github\\pokeapp.ui\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
@@ -36,9 +27,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{9A78F99B-1A23-19B4-73DA-94981EBE8883}|PokeApp.Ui.csproj|c:\\users\\abel\\documents\\github\\pokeapp.ui\\pokeapp.ui.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{9A78F99B-1A23-19B4-73DA-94981EBE8883}|PokeApp.Ui.csproj|solutionrelative:pokeapp.ui.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{79198378-A8F2-D940-AF2D-3293C950B036}|..\\PokeApp.Api\\PokeApp.Api.csproj|c:\\users\\abel\\documents\\github\\pokeapp.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -48,7 +36,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -56,32 +44,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "app.js",
-              "DocumentMoniker": "C:\\Users\\Abel\\Documents\\Github\\PokeApp.Ui\\wwwroot\\js\\app.js",
-              "RelativeDocumentMoniker": "wwwroot\\js\\app.js",
-              "ToolTip": "C:\\Users\\Abel\\Documents\\Github\\PokeApp.Ui\\wwwroot\\js\\app.js",
-              "RelativeToolTip": "wwwroot\\js\\app.js",
-              "ViewState": "AgIAAFcAAAAAAAAAAAAAAGUAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-07-23T23:10:41.94Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\Abel\\Documents\\Github\\PokeApp.Api\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "..\\PokeApp.Api\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\Abel\\Documents\\Github\\PokeApp.Api\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "..\\PokeApp.Api\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-23T20:07:34.071Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "PokeApiService.cs",
               "DocumentMoniker": "C:\\Users\\Abel\\Documents\\Github\\PokeApp.Api\\Services\\PokeApiService.cs",
               "RelativeDocumentMoniker": "..\\PokeApp.Api\\Services\\PokeApiService.cs",
@@ -94,27 +57,15 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "PokemonApiController.cs",
-              "DocumentMoniker": "C:\\Users\\Abel\\Documents\\Github\\PokeApp.Api\\Controllers\\PokemonApiController.cs",
-              "RelativeDocumentMoniker": "..\\PokeApp.Api\\Controllers\\PokemonApiController.cs",
-              "ToolTip": "C:\\Users\\Abel\\Documents\\Github\\PokeApp.Api\\Controllers\\PokemonApiController.cs",
-              "RelativeToolTip": "..\\PokeApp.Api\\Controllers\\PokemonApiController.cs",
-              "ViewState": "AgIAAGwAAAAAAAAAAAAMwHwAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-23T04:55:03.049Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
               "Title": "pokedex-style.css",
               "DocumentMoniker": "C:\\Users\\Abel\\Documents\\Github\\PokeApp.Ui\\wwwroot\\css\\pokedex-style.css",
               "RelativeDocumentMoniker": "wwwroot\\css\\pokedex-style.css",
               "ToolTip": "C:\\Users\\Abel\\Documents\\Github\\PokeApp.Ui\\wwwroot\\css\\pokedex-style.css",
               "RelativeToolTip": "wwwroot\\css\\pokedex-style.css",
-              "ViewState": "AgIAAKkAAAAAAAAAAAAAwMIAAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAANwAAAAAAAAAAAAAANwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-07-23T04:42:59.838Z"
+              "WhenOpened": "2025-07-23T04:42:59.838Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -130,44 +81,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Pokemon.cs",
-              "DocumentMoniker": "C:\\Users\\Abel\\Documents\\Github\\PokeApp.Api\\Models\\Pokemon.cs",
-              "RelativeDocumentMoniker": "..\\PokeApp.Api\\Models\\Pokemon.cs",
-              "ToolTip": "C:\\Users\\Abel\\Documents\\Github\\PokeApp.Api\\Models\\Pokemon.cs",
-              "RelativeToolTip": "..\\PokeApp.Api\\Models\\Pokemon.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAqwEEAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-23T04:21:41.359Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Abel\\Documents\\Github\\PokeApp.Api\\Program.cs",
-              "RelativeDocumentMoniker": "..\\PokeApp.Api\\Program.cs",
-              "ToolTip": "C:\\Users\\Abel\\Documents\\Github\\PokeApp.Api\\Program.cs",
-              "RelativeToolTip": "..\\PokeApp.Api\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-23T04:21:32.178Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 2,
               "Title": "index.html",
               "DocumentMoniker": "C:\\Users\\Abel\\Documents\\Github\\PokeApp.Ui\\wwwroot\\index.html",
               "RelativeDocumentMoniker": "wwwroot\\index.html",
               "ToolTip": "C:\\Users\\Abel\\Documents\\Github\\PokeApp.Ui\\wwwroot\\index.html",
               "RelativeToolTip": "wwwroot\\index.html",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAjwA4AAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-07-23T04:14:44.314Z"
+              "WhenOpened": "2025-07-23T04:14:44.314Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 1,
+              "Title": "app.js",
+              "DocumentMoniker": "C:\\Users\\Abel\\Documents\\Github\\PokeApp.Ui\\wwwroot\\js\\app.js",
+              "RelativeDocumentMoniker": "wwwroot\\js\\app.js",
+              "ToolTip": "C:\\Users\\Abel\\Documents\\Github\\PokeApp.Ui\\wwwroot\\js\\app.js",
+              "RelativeToolTip": "wwwroot\\js\\app.js",
+              "ViewState": "AgIAABAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-07-23T23:10:41.94Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "site.js",
               "DocumentMoniker": "C:\\Users\\Abel\\Documents\\Github\\PokeApp.Ui\\wwwroot\\js\\site.js",
               "RelativeDocumentMoniker": "wwwroot\\js\\site.js",
@@ -179,7 +119,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 6,
               "Title": "PokeApp.Ui.csproj",
               "DocumentMoniker": "C:\\Users\\Abel\\Documents\\Github\\PokeApp.Ui\\PokeApp.Ui.csproj",
               "RelativeDocumentMoniker": "PokeApp.Ui.csproj",

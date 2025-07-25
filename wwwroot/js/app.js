@@ -23,6 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const emailModal = new bootstrap.Modal(document.getElementById('sendEmailModal'));
     const emailForm = document.getElementById('send-email-form');
 
+
+
     let currentPage = 1;
     let currentPokemons = [];
     let selectedPokemonLi = null;
