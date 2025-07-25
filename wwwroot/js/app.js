@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const emailForm = document.getElementById('send-email-form');
 
 
-
     let currentPage = 1;
     let currentPokemons = [];
     let selectedPokemonLi = null;
@@ -60,6 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 listItem.addEventListener('click', () => {
                     showDetails(pokemon);
+                    playCry(pokemon.name); 
                     if (selectedPokemonLi) selectedPokemonLi.classList.remove('selected');
                     listItem.classList.add('selected');
                     selectedPokemonLi = listItem;
@@ -74,6 +74,14 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('No se pudieron cargar los Pokémon:', error);
             pokemonList.innerHTML = `<li class="placeholder-text" style="color: red; justify-content: center; padding: 20px;">${error.message}</li>`;
         }
+    }
+
+    function playCry(pokemonName) {
+        // Usar el nombre en minúsculas
+        const audioUrl = `https://play.pokemonshowdown.com/audio/cries/${pokemonName.toLowerCase()}.ogg`;
+        const audio = new Audio(audioUrl);
+        audio.volume = 0.7; // Puedes ajustar el volumen si quieres
+        audio.play();
     }
 
     async function loadPokemonTypes() {

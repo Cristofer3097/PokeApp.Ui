@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Abel\\Documents\\Github\\PokeApp.Ui\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9A78F99B-1A23-19B4-73DA-94981EBE8883}|PokeApp.Ui.csproj|c:\\users\\abel\\documents\\github\\pokeapp.ui\\wwwroot\\css\\pokedex-style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{9A78F99B-1A23-19B4-73DA-94981EBE8883}|PokeApp.Ui.csproj|solutionrelative:wwwroot\\css\\pokedex-style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{9A78F99B-1A23-19B4-73DA-94981EBE8883}|PokeApp.Ui.csproj|c:\\users\\abel\\documents\\github\\pokeapp.ui\\wwwroot\\js\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{9A78F99B-1A23-19B4-73DA-94981EBE8883}|PokeApp.Ui.csproj|solutionrelative:wwwroot\\js\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A78F99B-1A23-19B4-73DA-94981EBE8883}|PokeApp.Ui.csproj|c:\\users\\abel\\documents\\github\\pokeapp.ui\\wwwroot\\css\\pokedex-style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{9A78F99B-1A23-19B4-73DA-94981EBE8883}|PokeApp.Ui.csproj|solutionrelative:wwwroot\\css\\pokedex-style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9A78F99B-1A23-19B4-73DA-94981EBE8883}|PokeApp.Ui.csproj|c:\\users\\abel\\documents\\github\\pokeapp.ui\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -36,7 +36,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -56,13 +56,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "pokedex-style.css",
               "DocumentMoniker": "C:\\Users\\Abel\\Documents\\Github\\PokeApp.Ui\\wwwroot\\css\\pokedex-style.css",
               "RelativeDocumentMoniker": "wwwroot\\css\\pokedex-style.css",
               "ToolTip": "C:\\Users\\Abel\\Documents\\Github\\PokeApp.Ui\\wwwroot\\css\\pokedex-style.css",
               "RelativeToolTip": "wwwroot\\css\\pokedex-style.css",
-              "ViewState": "AgIAANwAAAAAAAAAAAAAANwAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
               "WhenOpened": "2025-07-23T04:42:59.838Z",
               "EditorCaption": ""
@@ -89,18 +89,17 @@
               "RelativeToolTip": "wwwroot\\index.html",
               "ViewState": "AgIAAAgAAAAAAAAAAAAjwA4AAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-07-23T04:14:44.314Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-23T04:14:44.314Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "app.js",
               "DocumentMoniker": "C:\\Users\\Abel\\Documents\\Github\\PokeApp.Ui\\wwwroot\\js\\app.js",
               "RelativeDocumentMoniker": "wwwroot\\js\\app.js",
               "ToolTip": "C:\\Users\\Abel\\Documents\\Github\\PokeApp.Ui\\wwwroot\\js\\app.js",
               "RelativeToolTip": "wwwroot\\js\\app.js",
-              "ViewState": "AgIAABAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAAD0AAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2025-07-23T23:10:41.94Z",
               "EditorCaption": ""
