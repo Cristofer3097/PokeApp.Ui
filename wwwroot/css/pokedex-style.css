@@ -16,18 +16,27 @@ body {
 
 #pokedex-container {
     display: flex;
+    justify-content: space-between; /* Crea un espacio entre los paneles */
+    align-items: center;
     width: 100%;
     max-width: auto; /* Ancho máximo */
     height: 100%;
     max-height: auto; /* Alto máximo */
     background: url('../assets/images/bg.png') no-repeat center center;
     background-size: cover;
-    padding: 6% 5%;
+    padding: 7% 5%;
     position: relative;
     box-sizing: border-box;
     background-size: 100% 100%;
 }
-
+#corner-logo {
+    position: absolute; /* Permite posicionarlo libremente dentro del contenedor */
+    top: 18px; /* Distancia desde arriba */
+    left: 45px; /* Distancia desde la izquierda */
+    width: 120px; /* Ancho del logo */
+    height: auto;
+    z-index: 10; /* Se asegura de que esté por encima del fondo */
+}
 #left-panel, #right-panel {
     flex: 1; /* Ambos paneles ocupan el mismo espacio */
     display: flex;
@@ -36,11 +45,19 @@ body {
 }
 
 #left-panel {
-    padding-right: 20px;
+    padding-right: 40px;
+    width: 70%; /* Ancho específico */
+    height: 80%; /* Altura ajustada */
+    display: flex;
+    flex-direction: column;
 }
 
 #right-panel {
-    padding-left: 20px;
+    padding-left: 40px;
+    width: 50%; /* Ancho específico */
+    height: 110%; /* Altura ajustada */
+    display: flex;
+    flex-direction: column;
 }
 
 #main-screen {
@@ -55,7 +72,8 @@ body {
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
+    text-align: center;
 }
 
 #pokemon-details-content img {
@@ -125,59 +143,109 @@ body {
     gap: 5px;
     margin-bottom: 5px;
 }
-
+/* Contenedor principal de la lista */
 #pokemon-list {
     list-style: none;
-    padding: 0;
-    margin-top: 10px;
+    padding: 10px 15px; /* Padding interno */
+    margin: 0;
     flex-grow: 1; /* La lista crece para ocupar el espacio */
-    overflow-y: scroll;
-    background-color: #f0f0f0;
-    border: 2px solid #333;
-    border-radius: 5px;
+    overflow-y: auto; /* Activa el scroll vertical */
+    /* Nuevos estilos para el diseño */
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Espacio de separación entre cada elemento */
+    background-color: transparent; /* Quitamos el fondo anterior */
+    border: none; /* Quitamos el borde anterior */
 }
 
+    /* Elemento individual de la lista (cada Pokémon) */
     #pokemon-list li {
-        padding: 8px 10px;
-        border-bottom: 1px solid #ddd;
-        cursor: pointer;
         display: flex;
         align-items: center;
-        font-size: 0.8em;
+        justify-content: space-between;
+        height: 55px; /* Altura corregida a un valor adecuado */
+        padding: 0 25px 0 10px;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: transform 0.2s ease-in-out;
+        font-size: 0.9em;
+        background: linear-gradient(90deg, #f7e1a3 110px, #fbebc9 110px);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-
-#pokemon-list li:hover {
-            background-color: #ddd;
-
+.pokemon-info-left {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Espacio entre la imagen y el número */
 }
 
-#pokemon-list li.selected {
-            background-color: #f0a0a0;
-
+/* NUEVA REGLA: Para el nombre del Pokémon */
+.pokemon-name {
+    text-transform: capitalize;
 }
 
-#pokemon-list li img {
-            margin-right: 10px;
-            width: 40px;
-            height: 40px;
 
-}
+        /* Efecto al pasar el mouse por encima */
+        #pokemon-list li:hover {
+            transform: scale(1.02);
+        }
 
-#pokemon-list::-webkit-scrollbar {
-        width: 10px;
+        /* Estilo para el Pokémon seleccionado */
+        #pokemon-list li.selected {
+            color: white; /* Texto blanco para que resalte */
+            font-weight: bold;
+            /* Gradiente naranja para la selección */
+            background: linear-gradient(90deg, #f8b053 105px, #f59c27 60px);
+            box-shadow: 0 4px 8px rgba(0,0,0,1.4);
+            transform: scale(1.03);
+        }
+
+        /* Estilo para la imagen del Pokémon en la lista */
+        #pokemon-list li img {
+            width: 45px;
+            height: 45px;
+        }
+    /* La barra de scroll completa */
+    #pokemon-list::-webkit-scrollbar {
+        width: 12px;
     }
 
-#pokemon-list::-webkit-scrollbar-track {
-        background: #f0f0f0;
+    /* El "camino" o fondo de la barra de scroll */
+    #pokemon-list::-webkit-scrollbar-track {
+        background: #2c4a8a; /* Color de fondo oscuro como en la referencia */
+        border-radius: 14px;
     }
 
-#pokemon-list::-webkit-scrollbar-thumb {
-        background: #888;
-        border-radius: 5px;
+    /* El mango o la parte que se arrastra */
+    #pokemon-list::-webkit-scrollbar-thumb {
+        background-color: red; /* Color naranja/rojo */
+        border-radius: 20px;
+        border: 3px solid #2c4a8a; /* Borde del mismo color que el fondo para crear un efecto de padding */
     }
 
-#pokemon-list::-webkit-scrollbar-thumb:hover {
-            background: #555;
+        /* Efecto al pasar el mouse sobre el mango */
+        #pokemon-list::-webkit-scrollbar-thumb:hover {
+            background-color: #f0932b;
+        }
+.btn-image-style {
+    background: url('../assets/images/btn-enviar.png') no-repeat center center;
+    background-size: 100% 100%;
+    /* Estilos para el texto */
+    font-family: 'Press Start 2P', cursive;
+    color: black;
+    font-size: 0.8em;
+    /* Posicionamiento del texto */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Otros estilos */
+    border: none !important; /*asegura que no hay borde */
+    outline: none;
+    box-shadow: none; 
+    width: 200px;
+    height: 55px;
+    cursor: pointer;
+    margin: 10px auto 0; /* Margen para separarlo del contenido */
+    transition: transform 0.2s;
 }
 
 #pagination-container {

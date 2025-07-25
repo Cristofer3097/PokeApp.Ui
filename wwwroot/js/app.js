@@ -134,6 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Se limpian y se crean los botones de acción
         detailsButtons.innerHTML = '';
         const sendEmailBtn = document.createElement('button');
+        sendEmailBtn.className = 'btn-image-style';
         sendEmailBtn.textContent = 'Enviar a Correo';
         sendEmailBtn.addEventListener('click', () => {
             prepareEmailModal({
