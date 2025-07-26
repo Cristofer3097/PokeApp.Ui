@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const apiBaseUrl = 'https://localhost:7118/api/pokemon';
 
     const pokemonList = document.getElementById('pokemon-list');
-    const paginationControls = document.getElementById('pagination-controls');
+    const generationSelector = document.getElementById('generation-selector');
     const nameFilterInput = document.getElementById('nameFilter');
     const speciesFilterSelect = document.getElementById('speciesFilter');
 
@@ -23,59 +23,93 @@ document.addEventListener('DOMContentLoaded', () => {
     const emailModal = new bootstrap.Modal(document.getElementById('sendEmailModal'));
     const emailForm = document.getElementById('send-email-form');
 
-
+    let currentGeneration = 1;
     let currentPage = 1;
     let currentPokemons = [];
     let selectedPokemonLi = null;
 
+    let allPokemonsOfGeneration = []; // Almacenará todos los pokémon de la generación actual
 
-    async function loadPokemons(page = 1, name = '', species = 'all') {
-        pokemonList.innerHTML = '<li class="placeholder-text" style="justify-content: center; padding: 20px;">Cargando...</li>';
-        const url = `${apiBaseUrl}?page=${page}&limit=20&nameFilter=${name}&speciesFilter=${species}`;
+    async function loadPokemons(genNumber = 1) {
+        currentGeneration = genNumber;
+        pokemonList.innerHTML = '<li class="placeholder-text" style="justify-content: center;">Cargando Pokemon...</li>';
+        detailsContent.innerHTML = '<p class="placeholder-text">Selecciona un Pokémon de la lista...</p>';
+        detailsButtons.innerHTML = '';
+        setupGenerationSelector();
 
-        // El bloque 'try' debe ir seguido de un bloque 'catch'
         try {
-            const response = await fetch(url);
+            const response = await fetch(`${apiBaseUrl}/generation/${genNumber}`);
             if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
 
-            const data = await response.json();
-            currentPokemons = data.results;
-            pokemonList.innerHTML = '';
+            allPokemonsOfGeneration = await response.json();
+            applyFilters();
 
-            if (currentPokemons.length === 0) {
-                pokemonList.innerHTML = '<li class="placeholder-text" style="justify-content: center; padding: 20px;">No se encontraron Pokémon.</li>';
-                setupPagination(0, 1);
-                return;
-            }
-
-            currentPokemons.forEach(pokemon => {
-                const listItem = document.createElement('li');
-                listItem.dataset.pokemonName = pokemon.name;
-                listItem.innerHTML = `
-                <img src="${pokemon.sprites?.front_default || ''}" alt="${pokemon.name}" style="width: 40px; height: 40px; margin-right: 10px;">
-                <span>No. ${String(pokemon.id).padStart(3, '0')}</span>
-                <span style="margin-left: auto; text-transform: capitalize;">${pokemon.name}</span>
-            `;
-
-                listItem.addEventListener('click', () => {
-                    showDetails(pokemon);
-                    playCry(pokemon.name); 
-                    if (selectedPokemonLi) selectedPokemonLi.classList.remove('selected');
-                    listItem.classList.add('selected');
-                    selectedPokemonLi = listItem;
-                });
-
-                pokemonList.appendChild(listItem);
-            });
-
-            setupPagination(data.totalPages, data.currentPage);
-
-        } catch (error) { // Este bloque 'catch' es el que faltaba o estaba incorrecto
+        } catch (error) {
             console.error('No se pudieron cargar los Pokémon:', error);
-            pokemonList.innerHTML = `<li class="placeholder-text" style="color: red; justify-content: center; padding: 20px;">${error.message}</li>`;
+            pokemonList.innerHTML = `<li class="placeholder-text" style="color: red; justify-content: center;">${error.message}</li>`;
         }
     }
 
+    function renderPokemonList(pokemonsToRender) {
+        pokemonList.innerHTML = '';
+        if (pokemonsToRender.length === 0) {
+            pokemonList.innerHTML = '<li class="placeholder-text" style="justify-content: center;">No se encontraron Pokémon con esos filtros.</li>';
+            return;
+        }
+
+        pokemonsToRender.forEach(pokemon => {
+            const listItem = document.createElement('li');
+            listItem.dataset.pokemonName = pokemon.name;
+            listItem.innerHTML = `
+                <div class="pokemon-info-left">
+                    <img src="${pokemon.sprites?.front_default || ''}" alt="${pokemon.name}">
+                    <span>No. ${String(pokemon.id).padStart(3, '0')}</span>
+                </div>
+                <span class="pokemon-name">${pokemon.name}</span>
+            `;
+
+            listItem.addEventListener('click', () => {
+                showDetails(pokemon);
+                playCry(pokemon.name); 
+                if (selectedPokemonLi) selectedPokemonLi.classList.remove('selected');
+                listItem.classList.add('selected');
+                selectedPokemonLi = listItem;
+            });
+            pokemonList.appendChild(listItem);
+        });
+    }
+
+    function applyFilters() {
+        const nameFilter = nameFilterInput.value.toLowerCase();
+        const typeFilter = speciesFilterSelect.value;
+        let filteredPokemons = allPokemonsOfGeneration;
+
+        if (nameFilter) {
+            filteredPokemons = filteredPokemons.filter(p => p.name.toLowerCase().includes(nameFilter));
+        }
+        if (typeFilter !== 'all') {
+            filteredPokemons = filteredPokemons.filter(p => p.types.some(t => t.type.name === typeFilter));
+        }
+        renderPokemonList(filteredPokemons);
+    }
+
+    function setupGenerationSelector() {
+        generationSelector.innerHTML = '';
+        const totalGenerations = 9;
+        for (let i = 1; i <= totalGenerations; i++) {
+            const genButton = document.createElement('button');
+            genButton.textContent = `Gen ${i}`;
+            genButton.dataset.generation = i;
+            genButton.className = 'btn-gen';
+            if (i === currentGeneration) {
+                genButton.classList.add('active');
+            }
+            genButton.addEventListener('click', () => loadPokemons(i));
+            generationSelector.appendChild(genButton);
+        }
+    }
+
+    
     function playCry(pokemonName) {
         // Usar el nombre en minúsculas
         const audioUrl = `https://play.pokemonshowdown.com/audio/cries/${pokemonName.toLowerCase()}.ogg`;
@@ -99,6 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error al cargar los tipos de Pokémon:', error);
         }
     }
+
 
     // --- MOSTRAR DETALLES ---
 
@@ -225,56 +260,11 @@ document.addEventListener('DOMContentLoaded', () => {
         prepareEmailModal({ subject: 'Lista filtrada de Pokémon' });
     });
 
-    paginationControls.addEventListener('click', (e) => {
-        if (e.target.tagName === 'A') {
-            const page = e.target.dataset.page;
-            if (page) {
-                loadPokemons(parseInt(page), nameFilterInput.value, speciesFilterSelect.value);
-            }
-        }
-    });
+  
 
-    // --- PAGINACIÓN --- (Función mejorada)
-
-    function setupPagination(totalPages, page) {
-        paginationControls.innerHTML = '';
-        currentPage = page;
-
-        // Botón "Anterior"
-        const prevLi = document.createElement('li');
-        prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
-        prevLi.innerHTML = `<a class="page-link" href="#" data-page="${currentPage - 1}">Ant</a>`;
-        paginationControls.appendChild(prevLi);
-
-        // Números de página
-        for (let i = 1; i <= totalPages; i++) {
-            if (i === currentPage) {
-                const li = document.createElement('li');
-                li.className = 'page-item active';
-                li.innerHTML = `<span class="page-link">${i}</span>`;
-                paginationControls.appendChild(li);
-            } else if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) {
-                const li = document.createElement('li');
-                li.className = 'page-item';
-                li.innerHTML = `<a class="page-link" href="#" data-page="${i}">${i}</a>`;
-                paginationControls.appendChild(li);
-            } else if (i === currentPage - 3 || i === currentPage + 3) {
-                const li = document.createElement('li');
-                li.className = 'page-item disabled';
-                li.innerHTML = `<span class="page-link">...</span>`;
-                paginationControls.appendChild(li);
-            }
-        }
-
-        // Botón "Siguiente"
-        const nextLi = document.createElement('li');
-        nextLi.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
-        nextLi.innerHTML = `<a class="page-link" href="#" data-page="${currentPage + 1}">Sig</a>`;
-        paginationControls.appendChild(nextLi);
-    }
 
     // --- Carga Inicial ---
     loadPokemonTypes();
-    loadPokemons();
-}
-);
+    loadPokemons(currentGeneration);
+
+});
