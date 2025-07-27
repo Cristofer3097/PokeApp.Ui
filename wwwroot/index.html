@@ -17,14 +17,27 @@
 
         <div id="left-panel">
             <div id="main-screen">
-                <div id="pokemon-details-content">
+                <div id="pokemon-common-info">
                     <p class="placeholder-text">Selecciona un Pokémon de la lista...</p>
                 </div>
 
-                <div id="details-buttons">
+                <div class="pokedex-tabs">
+                    <button class="tab-link active" data-tab="general-tab">General</button>
+                    <button class="tab-link" data-tab="stats-tab">Stats</button>
+                    <button class="tab-link" data-tab="evolutions-tab">Evoluciones</button>
+                    <button class="tab-link" data-tab="forms-tab">Formas</button>
                 </div>
+
+                <div class="pokedex-tab-content">
+                    <div id="general-tab" class="tab-pane active"></div>
+                    <div id="stats-tab" class="tab-pane"></div>
+                    <div id="evolutions-tab" class="tab-pane"></div>
+                    <div id="forms-tab" class="tab-pane"></div>
+                </div>
+
+                <div id="details-buttons"></div>
             </div>
-        </div>
+            </div>
 
         <div id="right-panel">
             <div id="pokedex-header">

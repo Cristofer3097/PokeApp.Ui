@@ -24,7 +24,7 @@ body {
     max-height: auto; /* Alto máximo */
     background: url('../assets/images/bg.png') no-repeat center center;
     background-size: cover;
-    padding: 9% 5%;
+    padding: 8% 6%;
     position: relative;
     box-sizing: border-box;
     background-size: 100% 100%;
@@ -46,17 +46,18 @@ body {
 
 #left-panel {
     padding-right: 40px;
+    margin-top: 30px;
     width: 70%; /* Ancho específico */
-    height: 80%; /* Altura ajustada */
+    height: 90%; /* Altura ajustada */
     display: flex;
     flex-direction: column;
 }
 
 #right-panel {
     padding-left: 40px;
-    margin-top: -120px;
+    margin-top: -130px;
     width: 50%; /* Ancho específico */
-    height: 85%; /* Altura ajustada */
+    height: 95%; /* Altura ajustada */
     display: flex;
     flex-direction: column;
 }
@@ -104,7 +105,11 @@ body {
     margin-top: 20px;
     text-align: center;
 }
-
+.type-badge {
+    display: inline-block;
+    margin-right: 6px;
+    vertical-align: middle;
+}
 #details-buttons button {
         font-family: 'Press Start 2P', cursive;
         font-size: 0.6em;
@@ -263,28 +268,31 @@ body {
     --bs-link-color: #c03028;
     --bs-link-hover-color: #c03028;
 }
+
+/* Estilos para la cuadrícula de estadísticas */
 .stats-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Dos columnas de igual tamaño */
-    gap: 5px 10px; /* Espacio entre filas y columnas */
-    margin: 10px auto;
-    max-width: 240px;
-    font-size: 0.7em;
+    display: grid; 
+    grid-template-columns: auto auto; 
+    gap: 5px 50px; 
+    margin-bottom: 10px; 
+    justify-content: center; 
+}
+
+/* Estilo para las etiquetas "Altura" y "Peso" */
+.stat-item {
+    font-size: 0.8em;
+    text-align: right; 
+    padding-right: 6px;
+}
+
+/* Estilo para los valores de altura y peso */
+.stat-value {
+    font-size: 0.8em;
     text-align: left;
 }
 
-.stat-item {
-    font-weight: bold;
-    padding-left: 5px;
-}
-
-.stat-value {
-    text-align: right;
-    padding-right: 5px;
-}
-
 .description-text {
-    margin-top: 15px; 
+    margin-top: 25px;
 }
 
 #generation-selector {
@@ -314,4 +322,260 @@ body {
     color: white;
     border-color: #333;
 }
+.pokedex-tabs {
+    display: flex;
+    margin-left: -5px;
+    margin-top: -10px;
+}
 
+.tab-link {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.6em;
+    padding: 8px 12px;
+    border: 1px solid #494949;
+    border-bottom: none;
+    background-color: #d3d3d3;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    margin-right: 2px;
+    position: relative;
+    bottom: -1px;
+}
+
+    .tab-link.active {
+        background-color: #f0f0f0; /* El mismo color que el contenido para un efecto integrado */
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+.pokedex-tab-content {
+    background-color: #f0f0f0;
+    border: 1px solid #494949;
+    border-radius: 0 8px 8px 8px;
+    padding: 20px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.tab-pane {
+    display: none; /* Ocultas por defecto */
+}
+
+    .tab-pane.active {
+        display: block; /* La activa se muestra */
+    }
+
+/* --- ESTILOS PARA VENTANA DE STATS --- */
+.stats-container {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 12px;
+    align-items: center;
+    font-size: 0.8em;
+}
+
+.stat-name {
+    text-align: right;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.stat-bar-container {
+    background-color: #ddd;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.stat-bar {
+    height: 18px;
+    background-color: #f08080; /* Color base para las barras */
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: white;
+    font-size: 0.8em;
+    padding-right: 5px;
+}
+
+/* --- ESTILOS PARA VENTANA DE EVOLUCIONES --- */
+.evolutions-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    text-align: center;
+}
+
+.evolution-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+    .evolution-stage img {
+        width: 100px;
+        height: 100px;
+        image-rendering: pixelated;
+    }
+
+    .evolution-stage p {
+        margin-top: 5px;
+        font-size: 0.8em;
+        text-transform: capitalize;
+    }
+
+.evolution-arrow {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+/* --- ESTILOS PARA VENTANA DE FORMAS --- */
+.forms-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    text-align: center;
+}
+
+.form-item img {
+    width: 120px;
+    height: 120px;
+    image-rendering: pixelated;
+    background-color: #ddd;
+    border-radius: 10px;
+}
+
+.form-item p {
+    font-size: 0.8em;
+    margin-top: 5px;
+}
+
+#main-screen {
+    justify-content: flex-start; /* Alinea los elementos al inicio */
+    gap: 15px; /* Espacio entre la info común, las pestañas y el contenido */
+}
+
+/* NUEVO: Estilos para el contenedor de la info común */
+#pokemon-common-info {
+    text-align: center;
+    flex-shrink: 0; /* Evita que se encoja */
+}
+
+    #pokemon-common-info img {
+        max-height: 140px;
+        width: auto;
+        image-rendering: pixelated;
+    }
+
+    #pokemon-common-info h3 {
+        text-transform: capitalize;
+        font-size: 1em;
+        margin-top: 5px;
+    }
+
+    #pokemon-common-info p {
+        font-size: 0.7em;
+    }
+
+/* Ajuste para que el contenido de las pestañas ocupe el espacio restante */
+.pokedex-tab-content {
+    min-height: 150px; /* Dale una altura mínima para que no colapse */
+}
+
+/* Modificación del tipo de letra para que se vea mejor en la info común */
+.type-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    margin: 0 4px;
+    border-radius: 5px;
+    color: white;
+    font-size: 0.7em;
+    text-transform: uppercase;
+}
+
+/* Ajusta el contenedor de botones */
+#details-buttons {
+    margin-top: auto; /* Empuja el botón al final del contenedor #main-screen */
+    padding-top: 10px;
+}
+.pokedex-tabs {
+    display: flex;
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+    background: #ccc;
+    border-bottom: 2px solid #494949;
+}
+.tab-link {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7em;
+    background: #eaeaea;
+    border: none;
+    border-right: 1px solid #aaa;
+    border-radius: 8px 8px 0 0;
+    padding: 7px 20px;
+    cursor: pointer;
+    color: #333;
+    margin-right: 2px;
+    outline: none;
+    box-shadow: none;
+    transition: background 0.2s;
+}
+.tab-link.active {
+    background: white;
+    color: #222;
+    border-bottom: 2px solid #f0f0f0;
+    font-weight: bold;
+}
+.tab-pane {
+    display: none;
+    border-radius: 0 0 12px 12px;
+    background: white;
+    border-top: none;
+    min-height: 140px;
+    padding: 17px 8px;
+}
+.tab-pane.active { display: block; }
+
+.evolution-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 5px;
+}
+
+.arrow-symbol {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #555;
+}
+
+.evo-requirement {
+    font-size: 0.7em;
+    font-weight: bold;
+    color: #333;
+    background-color: #e0e0e0;
+    padding: 3px 6px;
+    border-radius: 5px;
+}
+
+.evo-name {
+    font-size: 0.9em;
+    font-weight: bold;
+    text-transform: capitalize;
+    margin: 5px 0;
+}
+
+.evo-types {
+    font-size: 0.7em;
+    text-transform: uppercase;
+}
+
+.type-badge-small {
+    padding: 2px 5px;
+    border-radius: 3px;
+    color: white;
+    background-color: #a0a0a0; /* Color por defecto */
+    margin: 0 2px;
+}
