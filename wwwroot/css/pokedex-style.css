@@ -46,9 +46,9 @@ body {
 
 #left-panel {
     padding-right: 40px;
-    margin-top: 30px;
+    margin-top: 75px;
     width: 70%; /* Ancho específico */
-    height: 90%; /* Altura ajustada */
+    height: 100%; /* Altura ajustada */
     display: flex;
     flex-direction: column;
 }
@@ -63,19 +63,17 @@ body {
 }
 
 #main-screen {
-    /* Combinamos el color de fondo con la imagen en una sola línea */
     background: #98cb98 url('../assets/images/details.png') no-repeat center center;
-    background-size: cover; /* Para que la imagen cubra todo el espacio */
+    background-size: cover;
     border: 20px solid #494949;
     border-radius: 10px;
     flex-grow: 1;
     padding: 15px;
-    text-align: center;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     text-align: center;
+    justify-content: flex-start; 
 }
 
 #pokemon-details-content img {
@@ -102,14 +100,23 @@ body {
 }
 
 #details-buttons {
-    margin-top: 20px;
+    margin-top: 0px;
     text-align: center;
 }
+
+
+/* Modificación del tipo de letra para que se vea mejor en la info común */
 .type-badge {
     display: inline-block;
-    margin-right: 6px;
-    vertical-align: middle;
+    padding: 4px 8px;
+    margin: 0 4px;
+    border-radius: 5px;
+    color: white;
+    font-size: 0.7em;
+    text-transform: uppercase;
 }
+
+
 #details-buttons button {
         font-family: 'Press Start 2P', cursive;
         font-size: 0.6em;
@@ -322,55 +329,61 @@ body {
     color: white;
     border-color: #333;
 }
-.pokedex-tabs {
-    display: flex;
-    margin-left: -5px;
-    margin-top: -10px;
-}
+
 
 .tab-link {
     font-family: 'Press Start 2P', cursive;
-    font-size: 0.6em;
-    padding: 8px 12px;
-    border: 1px solid #494949;
-    border-bottom: none;
-    background-color: #d3d3d3;
+    font-size: 0.7em;
+    background: #eaeaea;
+    border: none;
+    border-right: 1px solid #aaa;
     border-radius: 8px 8px 0 0;
+    padding: 6px 30px; 
     cursor: pointer;
-    margin-right: 2px;
-    position: relative;
-    bottom: -1px;
+    color: #333;
+    margin-right: 4px;
+    outline: none;
+    box-shadow: none;
+    transition: background 0.2s;
 }
-
     .tab-link.active {
-        background-color: #f0f0f0; /* El mismo color que el contenido para un efecto integrado */
+        background: white;
+        color: #222;
         border-bottom: 1px solid #f0f0f0;
+        font-weight: bold;
     }
-
 .pokedex-tab-content {
     background-color: #f0f0f0;
+    border-top: none;
     border: 1px solid #494949;
     border-radius: 0 8px 8px 8px;
     padding: 20px;
     flex-grow: 1;
     overflow-y: auto;
+    min-height: 180px;
 }
-
 .tab-pane {
-    display: none; /* Ocultas por defecto */
+    display: none;
+    border-radius: 0 0 12px 12px;
+    background: white;
+    border-top: none;
+    min-height: 140px;
+    padding: 12px 8px;
 }
 
     .tab-pane.active {
-        display: block; /* La activa se muestra */
+        display: block;
     }
+
 
 /* --- ESTILOS PARA VENTANA DE STATS --- */
 .stats-container {
     display: grid;
-    grid-template-columns: 100px 1fr;
-    gap: 12px;
+    grid-template-columns: 90px 1fr;
+    gap: 15px;
     align-items: center;
-    font-size: 0.8em;
+    font-size: 0.7em;
+    
 }
 
 .stat-name {
@@ -413,21 +426,26 @@ body {
 }
 
     .evolution-stage img {
-        width: 100px;
-        height: 100px;
         image-rendering: pixelated;
+        margin-top: -5px;
     }
 
     .evolution-stage p {
-        margin-top: 5px;
+        margin-top: -5px;
         font-size: 0.8em;
         text-transform: capitalize;
     }
 
+
 .evolution-arrow {
-    font-size: 2em;
-    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 5px;
 }
+
 
 /* --- ESTILOS PARA VENTANA DE FORMAS --- */
 .forms-container {
@@ -435,6 +453,7 @@ body {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     text-align: center;
+    margin-top: 10px;
 }
 
 .form-item img {
@@ -447,13 +466,10 @@ body {
 
 .form-item p {
     font-size: 0.8em;
-    margin-top: 5px;
+    margin-top: 10px;
 }
 
-#main-screen {
-    justify-content: flex-start; /* Alinea los elementos al inicio */
-    gap: 15px; /* Espacio entre la info común, las pestañas y el contenido */
-}
+
 
 /* NUEVO: Estilos para el contenedor de la info común */
 #pokemon-common-info {
@@ -462,7 +478,7 @@ body {
 }
 
     #pokemon-common-info img {
-        max-height: 140px;
+        height: 120px;
         width: auto;
         image-rendering: pixelated;
     }
@@ -477,73 +493,16 @@ body {
         font-size: 0.7em;
     }
 
-/* Ajuste para que el contenido de las pestañas ocupe el espacio restante */
-.pokedex-tab-content {
-    min-height: 150px; /* Dale una altura mínima para que no colapse */
-}
 
-/* Modificación del tipo de letra para que se vea mejor en la info común */
-.type-badge {
-    display: inline-block;
-    padding: 4px 8px;
-    margin: 0 4px;
-    border-radius: 5px;
-    color: white;
-    font-size: 0.7em;
-    text-transform: uppercase;
-}
-
-/* Ajusta el contenedor de botones */
-#details-buttons {
-    margin-top: auto; /* Empuja el botón al final del contenedor #main-screen */
-    padding-top: 10px;
-}
 .pokedex-tabs {
     display: flex;
-    border-radius: 12px 12px 0 0;
-    overflow: hidden;
-    background: #ccc;
-    border-bottom: 2px solid #494949;
+    position: relative;
+    z-index: 1; 
+    margin-bottom: 0px;
 }
-.tab-link {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 0.7em;
-    background: #eaeaea;
-    border: none;
-    border-right: 1px solid #aaa;
-    border-radius: 8px 8px 0 0;
-    padding: 7px 20px;
-    cursor: pointer;
-    color: #333;
-    margin-right: 2px;
-    outline: none;
-    box-shadow: none;
-    transition: background 0.2s;
-}
-.tab-link.active {
-    background: white;
-    color: #222;
-    border-bottom: 2px solid #f0f0f0;
-    font-weight: bold;
-}
-.tab-pane {
-    display: none;
-    border-radius: 0 0 12px 12px;
-    background: white;
-    border-top: none;
-    min-height: 140px;
-    padding: 17px 8px;
-}
-.tab-pane.active { display: block; }
 
-.evolution-arrow {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    gap: 5px;
-}
+
+
 
 .arrow-symbol {
     font-size: 2.5em;
@@ -576,6 +535,13 @@ body {
     padding: 2px 5px;
     border-radius: 3px;
     color: white;
-    background-color: #a0a0a0; /* Color por defecto */
+    background-color: #a0a0a0; 
     margin: 0 2px;
+}
+
+
+.total-stat-value {
+    font-weight: bold;
+    text-align: left; 
+    padding-left: 5px;
 }

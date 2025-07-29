@@ -1,0 +1,3 @@
+C:\Users\Abel\Documents\Github\PokeApp.Ui\wwwroot\assets\types\electr.png
+C:\Users\Abel\Documents\Github\PokeApp.Ui\wwwroot\assets\types\fight.png
+C:\Users\Abel\Documents\Github\PokeApp.Ui\wwwroot\assets\types\psychc.png

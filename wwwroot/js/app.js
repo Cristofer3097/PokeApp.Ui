@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function loadPokemons(genNumber = 1) {
         currentGeneration = genNumber;
-        pokemonList.innerHTML = '<li class="placeholder-text">Cargando Generación...</li>';
+        pokemonList.innerHTML = '<li class="placeholder-text">Cargando...</li>';
         resetDetailsView();
         setupGenerationSelector();
 
@@ -71,18 +71,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showDetails(pokemon) {
         currentPokemon = pokemon;
-
+        
         // Panel superior común
         const bwGif = pokemon.sprites?.versions?.['generation-v']?.['black-white']?.animated?.front_default;
         const imageUrl = bwGif
             || pokemon.sprites?.other?.['official-artwork']?.front_default
             || pokemon.sprites?.front_default
             || '';
-        const typesHtml = pokemon.types.map(t => {
-            const typeName = t.type.name;
-            const iconUrl = getTypeIcon(typeName);
-            return `<span class="type-badge"><img src="${iconUrl}" alt="${typeName}" style="height:24px;vertical-align:middle;"> </span>`;
-        }).join(' ');
+        const typesHtml = renderTypeBadges(pokemon.types);
 
         detailsContent.innerHTML = `
             <img src="${imageUrl}" alt="${pokemon.name}">
@@ -115,19 +111,56 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         detailsButtons.appendChild(sendEmailBtn);
     }
+
+
+    function renderTypeBadges(types) {
+        if (!types) return ''; // Devuelve un string vacío si no hay tipos
+
+        return types.map(t => {
+            const typeName = t.type.name;
+            // La lógica de getTypeIcon ahora está aquí directamente:
+            const iconUrl = `assets/types/${typeName}.png`;
+
+            return `<span class="type-badge">
+                    <img src="${iconUrl}" alt="${typeName}" style="height:24px; vertical-align:middle;">
+                </span>`;
+        }).join(' ');
+    }
+   
+    //Convierte la altura de decímetros a metros y pies / pulgadas.
+    function formatHeight(decimetres) {
+        const meters = decimetres / 10;
+        const totalInches = meters * 39.3701;
+        const feet = Math.floor(totalInches / 12);
+        const inches = Math.round(totalInches % 12);
+        return `${meters.toFixed(1)}m (${feet}" ${inches}')`;
+    }
+
+  // Convierte el peso de hectogramos a kilogramos y libras.
+
+    function formatWeight(hectograms) {
+        const kg = hectograms / 10;
+        const lbs = kg * 2.20462;
+        return `${kg.toFixed(1)}kg (${lbs.toFixed(1)}lbs.)`;
+    }
+
     function renderStatsTab(pokemon) {
+        // 1. Calculamos el total de las estadísticas primero
+        const totalStats = pokemon.stats.reduce((sum, stat) => sum + stat.base_stat, 0);
         let html = '<div class="stats-container">';
         if (!pokemon.stats || pokemon.stats.length === 0) {
             statsContent.innerHTML = '<p>No hay estadísticas disponibles.</p>';
             return;
         }
+
+        // 2. Creamos las filas para cada estadística (como antes)
         pokemon.stats.forEach(stat => {
             // NOMBRE DEL STAT
             const statName = stat.statInfo?.name?.replace('special-', 'Sp. ') ||
                 stat.stat?.name?.replace('special-', 'Sp. ') ||
                 '???';
             // VALOR DEL STAT
-            const statValue = stat.base_stat ?? 0; // <-- CAMBIA ESTO
+            const statValue = stat.base_stat ?? 0; 
             const barWidth = Math.min(100, (statValue / 200) * 100);
 
             html += `
@@ -136,7 +169,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="stat-bar" style="width: ${barWidth}%;">${statValue}</div>
             </div>`;
         });
-        html += '</div>';
+
+        // 3. Añadimos la nueva fila para el total al final
+        html += `
+    <div class="stat-name total-stat">Total</div>
+    <div class="total-stat-value">${totalStats}</div>
+`;
         statsContent.innerHTML = html;
     }
 
@@ -153,17 +191,6 @@ tabLinks.forEach(tab => {
 });
 
 // --- FUNCIONES DE RENDERIZADO ---
-
-function renderCommonInfo(pokemon) {
-    const imageUrl = pokemon.sprites?.other?.['official-artwork']?.front_default || pokemon.sprites?.front_default || '';
-    const typesHtml = pokemon.types.map(t => `<span class="type-badge" style="background-color: var(--type-${t.type.name});">${t.type.name}</span>`).join(' ');
-
-    commonInfoContent.innerHTML = `
-            <img src="${imageUrl}" alt="${pokemon.name}">
-            <h3 class="text-capitalize">${pokemon.name} (#${pokemon.id})</h3>
-            <p><strong>Tipo:</strong> ${typesHtml}</p>
-        `;
-}
     function resetDetailsView() {
         commonInfoContent.innerHTML = '<p class="placeholder-text">Selecciona un Pokémon...</p>';
         generalContent.innerHTML = '';
@@ -179,13 +206,15 @@ function renderCommonInfo(pokemon) {
         document.getElementById('general-tab').classList.add('active');
     }
 
-function renderGeneralTab(pokemon) {
+    function renderGeneralTab(pokemon) {
+        const formattedHeight = formatHeight(pokemon.height);
+        const formattedWeight = formatWeight(pokemon.weight);
     generalContent.innerHTML = `
             <div class="stats-grid">
                  <div class="stat-item"><strong>Altura</strong></div>
-                 <div class="stat-value">${formatHeight(pokemon.height)}</div>
+                 <div class="stat-value">${formattedHeight}</div>
                  <div class="stat-item"><strong>Peso</strong></div>
-                 <div class="stat-value">${formatWeight(pokemon.weight)}</div>
+                 <div class="stat-value">${formattedWeight}</div>
             </div>
             <p class="description-text">${pokemon.description || 'Descripción no disponible.'}</p>
         `;
@@ -213,7 +242,7 @@ function renderGeneralTab(pokemon) {
         evolutionsContent.innerHTML = '<p class="placeholder-text">Cargando evoluciones...</p>';
         try {
             const response = await fetch(`${apiBaseUrl}/evolution-chain/${pokemonId}`);
-            if (!response.ok) throw new Error('No se pudo cargar la cadena de evolución.');
+            if (!response.ok) throw new Error('Error al cargar la cadena de evolución.');
 
             const evolutionSteps = await response.json();
 
@@ -227,7 +256,8 @@ function renderGeneralTab(pokemon) {
                 // Solo procesamos si el Pokémon y sus datos existen
                 if (step && step.pokemon) {
                     const p = step.pokemon;
-                    const types = p.types.map(t => `<span class="type-badge-small">${t.type.name}</span>`).join(' ');
+                    const types = renderTypeBadges(p.types);
+                    
 
                     // Renderiza la imagen y datos del Pokémon en la etapa actual
                     html += `
@@ -368,17 +398,6 @@ async function loadPokemonTypes() {
     }
 }
 
-    function getTypeIcon(typeName) {
-        // Cambia la ruta según tu estructura de carpetas
-        return `assets/types/${typeName}.png`;
-    }
-    function formatHeight(decimetros) {
-        return `${(decimetros / 10).toFixed(2)}m`;
-    }
-
-    function formatWeight(hectograms) {
-        return `${(hectograms / 10).toFixed(1)}kg`;
-    }
 
     // --- LÓGICA DE CORREO ---
 
