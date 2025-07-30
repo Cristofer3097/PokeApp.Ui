@@ -104,7 +104,50 @@ body {
     text-align: center;
 }
 
+/* --- ESTILOS PARA HABILIDADES --- */
 
+/* Contenedor de una habilidad */
+.ability-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; 
+    margin-bottom: 7px;
+    gap: 10px; 
+}
+
+/* Nombre de la habilidad, ahora estilizado como un botón */
+.ability-name {
+    font-size: 0.8em;
+    font-weight: bold;
+    color: #333;
+    background-color: #e0e0e0;
+    padding: 4px 6px;
+    border-radius: 6px;
+    text-transform: capitalize;
+    text-decoration: none; 
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+    .ability-name:hover {
+        background-color: #ccc;
+       
+    }
+
+/* Etiqueta para la habilidad oculta */
+.hidden-ability-label {
+    font-size: 0.8em;
+    color: #6c757d;
+}
+
+/* Estilo para el fondo de la habilidad oculta */
+.ability-name.is-hidden-ability {
+    background-color: #d9534f; 
+    color: white;
+}
+
+    .ability-name.is-hidden-ability:hover {
+        background-color: #c9302c; 
+    }
 /* Modificación del tipo de letra para que se vea mejor en la info común */
 .type-badge {
     display: inline-block;
@@ -299,7 +342,7 @@ body {
 }
 
 .description-text {
-    margin-top: 25px;
+    margin-top: 5px;
     font-size: 0.9em;
 }
 

@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const generationSelector = document.getElementById('generation-selector');
     const nameFilterInput = document.getElementById('nameFilter');
     const speciesFilterSelect = document.getElementById('speciesFilter');
+    const abilityModal = new bootstrap.Modal(document.getElementById('abilityModal'));
     const filterBtn = document.getElementById('filter-btn');
     const clearFiltersBtn = document.getElementById('clear-filters-btn');
     const exportBtn = document.getElementById('export-excel-btn'); 
@@ -47,7 +48,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         renderPokemonList(filteredPokemons);
     }
-
+    // Event listener que se activa al hacer clic en el panel izquierdo
+    document.getElementById('left-panel').addEventListener('click', (event) => {
+        // Verificamos si el elemento clickeado es una habilidad
+        if (event.target.classList.contains('ability-name')) {
+            const abilityName = event.target.dataset.abilityName;
+            if (abilityName) {
+                showAbilityModal(abilityName);
+            }
+        }
+    });
     
 
     async function loadPokemons(genNumber = 1) {
@@ -144,6 +154,26 @@ document.addEventListener('DOMContentLoaded', () => {
         return `${kg.toFixed(1)}kg (${lbs.toFixed(1)}lbs.)`;
     }
 
+    async function showAbilityModal(abilityName) {
+        const modalTitle = document.getElementById('abilityModalLabel');
+        const modalBody = document.getElementById('abilityModalBody');
+
+        // Mostramos un mensaje de carga
+        modalTitle.textContent = abilityName.split('-').join(' ');
+        modalBody.innerHTML = '<p>Buscando descripción...</p>';
+        abilityModal.show();
+
+        try {
+            const response = await fetch(`${apiBaseUrl}/ability/${abilityName}`);
+            if (!response.ok) throw new Error('No se encontró la descripción.');
+
+            const data = await response.json();
+            modalBody.innerHTML = `<p>${data.description}</p>`;
+        } catch (error) {
+            modalBody.innerHTML = `<p>${error.message}</p>`;
+        }
+    }
+
     function renderStatsTab(pokemon) {
         // 1. Calculamos el total de las estadísticas primero
         const totalStats = pokemon.stats.reduce((sum, stat) => sum + stat.base_stat, 0);
@@ -209,16 +239,35 @@ tabLinks.forEach(tab => {
     function renderGeneralTab(pokemon) {
         const formattedHeight = formatHeight(pokemon.height);
         const formattedWeight = formatWeight(pokemon.weight);
-    generalContent.innerHTML = `
-            <div class="stats-grid">
-                 <div class="stat-item"><strong>Altura</strong></div>
-                 <div class="stat-value">${formattedHeight}</div>
-                 <div class="stat-item"><strong>Peso</strong></div>
-                 <div class="stat-value">${formattedWeight}</div>
-            </div>
-            <p class="description-text">${pokemon.description || 'Descripción no disponible.'}</p>
-        `;
 
+        // Habilidades
+        let abilitiesHtml = pokemon.abilities.map(a => {
+            const abilityName = a.ability.name.split('-').join(' ');
+            const hiddenClass = a.is_hidden ? 'is-hidden-ability' : '';
+            const isHidden = a.is_hidden ? '<span class="hidden-ability-label">(Oculta)</span>' : '';
+            // Añadimos data-ability-name para saber en qué habilidad se hizo clic
+            return `<div class="ability-item">
+                    <span class="ability-name ${hiddenClass}" data-ability-name="${a.ability.name}">${abilityName}</span>
+                    ${isHidden}
+                </div>`;
+        }).join('');
+
+        const eggGroupsHtml = pokemon.eggGroups.map(eg => eg.name).join(', ');
+
+
+        generalContent.innerHTML = `
+        <p class="description-text">${pokemon.description || 'Descripción no disponible.'}</p>
+        <div class="stats-grid">
+             <div class="stat-item"><strong>Altura</strong></div>
+             <div class="stat-value">${formattedHeight}</div>
+             <div class="stat-item"><strong>Peso</strong></div>
+             <div class="stat-value">${formattedWeight}</div>
+             <div class="stat-item"><strong>Habilidades</strong></div>
+             <div class="stat-value">${abilitiesHtml}</div>
+             <div class="stat-item"><strong>Grupos Huevo</strong></div>
+             <div class="stat-value text-capitalize">${eggGroupsHtml}</div>
+        </div>
+    `;
     const sendEmailBtn = document.createElement('button');
     sendEmailBtn.className = 'btn-image-style';
     sendEmailBtn.textContent = 'Enviar a Correo';
