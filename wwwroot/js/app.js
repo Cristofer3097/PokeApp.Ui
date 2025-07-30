@@ -364,31 +364,42 @@ tabLinks.forEach(tab => {
             pokemonList.appendChild(listItem);
         });
     }
+    function renderFormsTab(pokemon) {
+        const sprites = pokemon.sprites;
+        let forms = []; // Iniciaremos un array vacío
 
-function renderFormsTab(pokemon) {
-    const sprites = pokemon.sprites;
-    const forms = [
-        { name: 'Normal', url: sprites.front_default },
-        { name: 'Shiny', url: sprites.front_shiny },
-    ];
-    if (sprites.front_female) {
-        forms.push({ name: 'Forma Femenina', url: sprites.front_female });
-        forms.push({ name: 'Shiny Femenina', url: sprites.front_shiny_female });
-    }
-
-    let html = '<div class="forms-container">';
-    forms.forEach(form => {
-        if (form.url) {
-            html += `
-                    <div class="form-item">
-                        <img src="${form.url}" alt="${form.name}">
-                        <p>${form.name}</p>
-                    </div>`;
+        // Primero, verificamos si el Pokémon tiene una forma femenina
+        if (sprites.front_female) {
+            // Si la tiene, usamos los símbolos de género para las etiquetas
+            forms = [
+                { name: '♂', url: sprites.front_default },
+                { name: '♂ Shiny', url: sprites.front_shiny },
+                { name: '♀', url: sprites.front_female },
+                { name: '♀ Shiny', url: sprites.front_shiny_female }
+            ];
+        } else {
+            // Si no tiene forma femenina, usamos las etiquetas estándar
+            forms = [
+                { name: 'Normal', url: sprites.front_default },
+                { name: 'Shiny', url: sprites.front_shiny }
+            ];
         }
-    });
-    html += '</div>';
-    formsContent.innerHTML = html;
-}
+
+        // El resto de la función que crea el HTML no necesita cambios
+        let html = '<div class="forms-container">';
+        forms.forEach(form => {
+            // Solo mostramos la forma si la imagen (URL) existe
+            if (form.url) {
+                html += `
+                <div class="form-item">
+                    <img src="${form.url}" alt="${form.name}">
+                    <p>${form.name}</p>
+                </div>`;
+            }
+        });
+        html += '</div>';
+        formsContent.innerHTML = html;
+    }
 
     function setupGenerationSelector() {
         generationSelector.innerHTML = '';

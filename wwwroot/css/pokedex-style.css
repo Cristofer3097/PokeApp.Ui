@@ -420,16 +420,31 @@ body {
     gap: 15px;
     text-align: center;
 }
-
+.evolutions-list-container {
+    display: flex;
+    flex-direction: column; /* Apila cada ruta de evolución verticalmente */
+    gap: 20px; /* Espacio entre cada línea de evolución */
+    max-height: 220px; /* Altura máxima antes de activar el scroll */
+    overflow-y: auto; /* Scroll si hay muchas evoluciones */
+    padding-right: 10px;
+}
+.evolution-path {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px; /* Espacio entre Pokémon y la flecha */
+}
 .evolution-stage {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
+    width: 100px; /* Ancho fijo para cada Pokémon */
 }
-
     .evolution-stage img {
+        height: 80px;
+        width: 80px;
         image-rendering: pixelated;
-        margin-top: -5px;
     }
 
     .evolution-stage p {
@@ -446,8 +461,27 @@ body {
     justify-content: center;
     text-align: center;
     gap: 5px;
+    min-width: 120px;
 }
-
+.arrow-symbol {
+    font-size: 2em;
+    font-weight: bold;
+    color: #555;
+}
+.evo-requirement {
+    font-size: 0.7em;
+    font-weight: bold;
+    color: #333;
+    background-color: #e0e0e0;
+    padding: 3px 6px;
+    border-radius: 5px;
+}
+.evo-name {
+    font-size: 0.9em;
+    font-weight: bold;
+    text-transform: capitalize;
+    margin: 5px 0;
+}
 
 /* --- ESTILOS PARA VENTANA DE FORMAS --- */
 .forms-container {
@@ -467,11 +501,19 @@ body {
 }
 
 .form-item p {
-    font-size: 0.8em;
+    font-size: 1.1em;
     margin-top: 10px;
 }
 
+.form-item p:first-child { 
+    font-weight: bold; 
+    font-size: 1.3em; 
+    text-shadow: 1px 1px 0 #ccc; 
+}
 
+.form-item p img {
+    image-rendering: pixelated; /* Asegura que las imágenes se rendericen con efecto pixelado */
+}
 
 /* NUEVO: Estilos para el contenedor de la info común */
 #pokemon-common-info {
@@ -506,32 +548,6 @@ body {
 
 
 
-.arrow-symbol {
-    font-size: 2.5em;
-    font-weight: bold;
-    color: #555;
-}
-
-.evo-requirement {
-    font-size: 0.7em;
-    font-weight: bold;
-    color: #333;
-    background-color: #e0e0e0;
-    padding: 3px 6px;
-    border-radius: 5px;
-}
-
-.evo-name {
-    font-size: 0.9em;
-    font-weight: bold;
-    text-transform: capitalize;
-    margin: 5px 0;
-}
-
-.evo-types {
-    font-size: 0.7em;
-    text-transform: uppercase;
-}
 
 .type-badge-small {
     padding: 2px 5px;
