@@ -245,7 +245,11 @@ tabLinks.forEach(tab => {
             if (!response.ok) throw new Error('Error al cargar la cadena de evolución.');
 
             const evolutionSteps = await response.json();
-
+            if (!Array.isArray(evolutionSteps) || evolutionSteps.length === 0) {
+                evolutionsContent.innerHTML = '<p class="placeholder-text">Datos de evolución no disponibles.</p>';
+                return;
+            }
+            // Si el Pokémon seleccionado no es la base de la cadena (ej. eevee), lo buscamos
             if (!Array.isArray(evolutionSteps) || evolutionSteps.length <= 1) {
                 evolutionsContent.innerHTML = '<p class="placeholder-text">Este Pokémon no tiene evoluciones.</p>';
                 return;
@@ -293,22 +297,48 @@ tabLinks.forEach(tab => {
         const triggerName = detail.trigger.name;
 
         if (triggerName === "level-up") {
-            return `<span class="evo-requirement">Nivel ${detail.min_level}</span>`;
+            // AMISTAD + NIVEL
+            if (detail.min_happiness != null && detail.min_level != null) {
+                return `<span class="evo-requirement">Amistad ${detail.min_happiness} + Nivel ${detail.min_level}</span>`;
+            }
+            // Solo AMISTAD
+            if (detail.min_happiness != null) {
+                return `<span class="evo-requirement">Amistad  ${detail.min_happiness} +  Nivel</span>`;
+            }
+            // Solo NIVEL
+            if (detail.min_level != null) {
+                return `<span class="evo-requirement">Nivel ${detail.min_level}</span>`;
+            }
+            // Subida sin requisito visible
+            return `<span class="evo-requirement">Subir Nivel</span>`;
         }
+
         if (triggerName === "use-item" && detail.item) {
-            // Limpiamos el nombre del item, ej: "fire-stone" -> "Fire Stone"
-            const itemName = detail.item.name.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-            return `<span class="evo-requirement">Usa ${itemName}</span>`;
+            const itemName = detail.item.name
+                .split('-')
+                .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+                .join(' ');
+            const iconUrl = getItemIcon(detail.item.name);
+
+            return `<span class="evo-requirement">
+                    <img src="${iconUrl}" alt="${itemName}" style="height:24px; vertical-align:middle; margin-right:5px;">
+                    ${itemName}
+                </span>`;
         }
+
         if (triggerName === "trade") {
             return `<span class="evo-requirement">Intercambio</span>`;
         }
 
-        // Puedes añadir más casos para otros tipos de evolución (amistad, etc.)
-        return `<span class="evo-requirement">${triggerName}</span>`;
+        // Otros triggers
+        const cleanTrigger = triggerName.replace('-', ' ');
+        return `<span class="evo-requirement" style="text-transform: capitalize;">${cleanTrigger}</span>`;
     }
     
-
+    function getItemIcon(itemName) {
+        const formattedName = itemName.replace(/-/g, '').toUpperCase();
+        return `assets/items/${formattedName}.png`;
+    }
 
     function renderPokemonList(pokemonsToRender) {
         pokemonList.innerHTML = '';

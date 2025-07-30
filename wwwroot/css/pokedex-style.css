@@ -300,6 +300,7 @@ body {
 
 .description-text {
     margin-top: 25px;
+    font-size: 0.9em;
 }
 
 #generation-selector {
@@ -338,7 +339,7 @@ body {
     border: none;
     border-right: 1px solid #aaa;
     border-radius: 8px 8px 0 0;
-    padding: 6px 30px; 
+    padding: 7px 30px; 
     cursor: pointer;
     color: #333;
     margin-right: 4px;
@@ -379,7 +380,7 @@ body {
 /* --- ESTILOS PARA VENTANA DE STATS --- */
 .stats-container {
     display: grid;
-    grid-template-columns: 90px 1fr;
+    grid-template-columns: 80px 1fr;
     gap: 15px;
     align-items: center;
     font-size: 0.7em;
@@ -399,7 +400,8 @@ body {
 }
 
 .stat-bar {
-    height: 18px;
+    
+    height: 20px;
     background-color: #f08080; /* Color base para las barras */
     border-radius: 10px;
     display: flex;
@@ -407,7 +409,7 @@ body {
     justify-content: flex-end;
     color: white;
     font-size: 0.8em;
-    padding-right: 5px;
+    padding-right: 10px;
 }
 
 /* --- ESTILOS PARA VENTANA DE EVOLUCIONES --- */
@@ -544,4 +546,14 @@ body {
     font-weight: bold;
     text-align: left; 
     padding-left: 5px;
+}
+.evolution-options-container {
+    display: flex;
+    flex-direction: column; /* Apila las evoluciones verticalmente */
+    gap: 15px;
+    max-height: 200px; /* Altura máxima antes de que aparezca el scroll */
+    overflow-y: auto; /* Scroll vertical si hay muchos elementos */
+    padding: 10px;
+    background-color: rgba(0,0,0,0.05);
+    border-radius: 10px;
 }
