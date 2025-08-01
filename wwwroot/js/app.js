@@ -31,11 +31,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Variables de Estado ---
     let currentGeneration = 1;
+    let limit = 40;
+    let offset = 0;
     let allPokemonsOfGeneration = [];
-    let selectedPokemonLi = null;
-    let currentCry = null;
+    let totalPokemonsInGeneration = 0;
+    let isLoading = false; 
+    
 
     function applyFilters() {
+        pokemonList.removeEventListener('scroll', onScroll);
         const nameFilter = nameFilterInput.value.toLowerCase();
         const typeFilter = speciesFilterSelect.value;
         let filteredPokemons = allPokemonsOfGeneration;
@@ -47,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
             filteredPokemons = filteredPokemons.filter(p => p.types.some(t => t.type.name === typeFilter));
         }
         renderPokemonList(filteredPokemons);
+        alert("El filtrado en modo scroll infinito requiere una lógica más avanzada. Por ahora, se ha desactivado el scroll.");
     }
     // Event listener que se activa al hacer clic en el panel izquierdo
     document.getElementById('left-panel').addEventListener('click', (event) => {
@@ -60,23 +65,53 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
 
-    async function loadPokemons(genNumber = 1) {
+    async function loadPokemons(genNumber) {
+        // Reiniciamos todo cuando se cambia de generación
         currentGeneration = genNumber;
-        pokemonList.innerHTML = '<li class="placeholder-text">Cargando...</li>';
-        resetDetailsView();
+        offset = 0;
+        pokemonList.innerHTML = ''; // Limpiamos la lista
         setupGenerationSelector();
 
+        await loadMorePokemons(); // Cargamos el primer lote
+    }
+    async function loadMorePokemons() {
+        // Esta primera línea previene cargas si ya se está cargando o si se completó
+        if (isLoading || (offset > 0 && offset >= totalPokemonsInGeneration)) {
+            return;
+        }
+
+        isLoading = true;
+        showLoadingIndicator(true);
+
         try {
-            const response = await fetch(`${apiBaseUrl}/generation/${genNumber}`);
+            const response = await fetch(`${apiBaseUrl}/generation/${currentGeneration}?limit=${limit}&offset=${offset}`);
             if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
-            allPokemonsOfGeneration = await response.json();
-            applyFilters();
-        } catch (error) {
-            console.error('No se pudieron cargar los Pokémon:', error);
-            pokemonList.innerHTML = `<li class="placeholder-text" style="color: red;">${error.message}</li>`;
+
+            const data = await response.json();
+            totalPokemonsInGeneration = data.totalCount;
+
+            renderPokemonList(data.pokemons, true);
+            offset += limit;
+
+            if (offset < totalPokemonsInGeneration) {
+                // Llama a esta misma función de nuevo para cargar el siguiente lote
+                setTimeout(loadMorePokemons, 100);
+            }
+        }
+        catch (error) {
+            console.error('No se pudieron cargar más Pokémon:', error);
+        } finally {
+            // --- INICIO DE LA CORRECCIÓN ---
+            // Se reinicia isLoading después de CADA carga para permitir que la cadena continúe.
+            isLoading = false;
+
+            // El indicador de "Cargando..." solo se oculta cuando se han cargado TODOS los Pokémon.
+            if (offset >= totalPokemonsInGeneration) {
+                showLoadingIndicator(false);
+            }
+            // --- FIN DE LA CORRECCIÓN ---
         }
     }
-
     // --- MOSTRAR DETALLES ---
 
     function showDetails(pokemon) {
@@ -389,29 +424,48 @@ tabLinks.forEach(tab => {
         return `assets/items/${formattedName}.png`;
     }
 
-    function renderPokemonList(pokemonsToRender) {
-        pokemonList.innerHTML = '';
-        if (pokemonsToRender.length === 0) {
-            pokemonList.innerHTML = '<li class="placeholder-text" style="justify-content: center;">No se encontraron Pokémon.</li>';
+    function renderPokemonList(pokemonsToRender, append = false) {
+        if (!append) {
+            pokemonList.innerHTML = '';
+        }
+        if (pokemonsToRender.length === 0 && !append) {
+            pokemonList.innerHTML = '<li class="placeholder-text">No se encontraron Pokémon.</li>';
             return;
         }
 
         pokemonsToRender.forEach(pokemon => {
             const listItem = document.createElement('li');
-            listItem.addEventListener('click', () => {
-                showDetails(pokemon);
-                if (selectedPokemonLi) selectedPokemonLi.classList.remove('selected');
-                listItem.classList.add('selected');
-                selectedPokemonLi = listItem;
-            });
+            listItem.addEventListener('click', () => showDetails(pokemon)); // Asumiendo que tienes una función showDetails
             listItem.innerHTML = `
-            <div class="pokemon-info-left">
-                <img src="${pokemon.sprites?.front_default || ''}" alt="${pokemon.name}">
-                <span>No. ${String(pokemon.id).padStart(3, '0')}</span>
-            </div>
-            <span class="pokemon-name">${pokemon.name}</span>`;
+                <div class="pokemon-info-left">
+                    <img src="${pokemon.sprites?.front_default || ''}" alt="${pokemon.name}">
+                    <span>No. ${String(pokemon.id).padStart(3, '0')}</span>
+                </div>
+                <span class="pokemon-name">${pokemon.name}</span>`;
             pokemonList.appendChild(listItem);
         });
+    }
+    // --- MANEJADOR DEL EVENTO SCROLL ---
+
+    
+
+    function showLoadingIndicator(show) {
+        // Primero, siempre busca y elimina cualquier indicador existente.
+        // Esto es clave para reposicionarlo al final en cada carga.
+        const existingIndicator = document.getElementById('loading-indicator');
+        if (existingIndicator) {
+            existingIndicator.remove();
+        }
+
+        // Si `show` es true, crea y añade un nuevo indicador al final de la lista.
+        if (show) {
+            const indicator = document.createElement('li');
+            indicator.id = 'loading-indicator';
+            indicator.className = 'placeholder-text';
+            indicator.style.justifyContent = 'center'; // Para centrar el texto
+            indicator.textContent = 'Cargando más Pokémon...';
+            pokemonList.appendChild(indicator);
+        }
     }
     function renderFormsTab(pokemon) {
         const sprites = pokemon.sprites;

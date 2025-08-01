@@ -532,7 +532,7 @@ body {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     text-align: center;
-    margin-top: 10px;
+    margin-top: 0px;
 }
 
 .form-item img {
@@ -545,7 +545,7 @@ body {
 
 .form-item p {
     font-size: 1.1em;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .form-item p:first-child { 
@@ -558,7 +558,7 @@ body {
     image-rendering: pixelated; /* Asegura que las imágenes se rendericen con efecto pixelado */
 }
 
-/* NUEVO: Estilos para el contenedor de la info común */
+/* Estilos para el contenedor de la info común */
 #pokemon-common-info {
     text-align: center;
     flex-shrink: 0; /* Evita que se encoja */
@@ -615,4 +615,31 @@ body {
     padding: 10px;
     background-color: rgba(0,0,0,0.05);
     border-radius: 10px;
+}
+/* --- ESTILOS PARA "MÁS PROYECTOS" --- */
+
+/* Contenedor posicionado en la parte inferior del marco */
+#more-projects-container {
+    position: absolute;
+    bottom: 4%; /* Posición desde abajo */
+    right: 8%; /* Posición desde la derecha */
+    width: 25%; /* Ancho del contenedor */
+    max-width: 200px;
+    height: auto;
+}
+    /* Ajustes a la imagen y al enlace */
+    #more-projects-container a {
+        display: block;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 140%;
+        max-width: 300px;
+    }
+
+#more-projects-image {
+    width: 100%;
+    height: auto;
+    border: 15px double white;
+    image-rendering: pixelated;
 }
