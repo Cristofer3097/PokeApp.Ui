@@ -643,3 +643,127 @@ body {
     border: 15px double white;
     image-rendering: pixelated;
 }
+/* --- ESTILOS PARA EL REPRODUCTOR DE MÚSICA --- */
+
+#music-player {
+    position: absolute;
+    top: 1%; /* Ajusta la distancia desde arriba */
+    right: 4%; /* Ajusta la distancia desde la derecha */
+    display: flex;
+    gap: 15px; /* Espacio entre los botones */
+    z-index: 20;
+}
+
+.music-btn {
+    width: 40px; /* Ancho del botón */
+    height: 40px; /* Alto del botón */
+    background-color: transparent;
+    border: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+    .music-btn:hover {
+        transform: scale(1.1);
+    }
+
+/* --- Asigna las imágenes a cada botón (CAMBIA LAS RUTAS) --- */
+
+#prev-track-btn {
+    background-image: url('../assets/images/prev.png');
+}
+
+#next-track-btn {
+    background-image: url('../assets/images/next.png');
+}
+
+#play-pause-btn {
+    background-image: url('../assets/images/play.png'); /* Ícono por defecto */
+  
+}
+
+    /* Clase que se añade con JS para cambiar el ícono a "pausa" */
+    #play-pause-btn.playing {
+        background-image: url('../assets/images/pause.png');
+        
+    }
+
+#credits-footer {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    width: 100%;
+    text-align: left;
+    padding-left: 45px; 
+    font-family: 'Press Start 2P', cursive; 
+    font-size: 0.6em; 
+    color: white; 
+    text-shadow: 1px 1px 2px black;
+    user-select: none;
+    pointer-events: none;
+}
+
+@media (max-width: 992px) {
+
+    /* 1. Ajustamos el cuerpo y el contenedor principal */
+    body {
+        height: auto; /* Permite que el cuerpo crezca con el contenido */
+        padding: 10px 0;
+    }
+
+    #pokedex-container {
+        flex-direction: column; 
+        height: auto; 
+        width: 100%;
+        padding: 15px;
+        background: #dc0a2d;
+    }
+
+    /* 2. Ocultamos el logo superior */
+    #corner-logo {
+        display: none;
+    }
+
+    /* 3. Ajustamos los paneles para que ocupen todo el ancho */
+    #left-panel, #right-panel {
+        width: 100%;
+        max-width: 500px;
+        padding: 0;
+        margin: 0 0 20px 0; 
+        height: auto;
+    }
+
+    #right-panel {
+        height: 600px; /* Le damos una altura fija al panel de la lista en móviles */
+    }
+
+    /* 4. Reposicionamos los elementos del pie de página */
+    #more-projects-container, #credits-footer {
+        position: relative; 
+        bottom: auto;
+        left: auto;
+        right: auto;
+        margin: 20px auto; 
+    }
+
+    #more-projects-container {
+        width: 60%;
+        max-width: 250px;
+    }
+
+    #credits-footer {
+        width: 100%;
+        padding-left: 0; 
+        text-align: center; 
+        bottom: 10px;
+    }
+
+    /* 5. Ajustamos la posición del reproductor de música */
+    #music-player {
+        top: 15px;
+        right: 15px;
+    }
+}

@@ -542,6 +542,57 @@ async function loadPokemonTypes() {
     }
 }
 
+    // --- LÓGICA DEL REPRODUCTOR DE MÚSICA ---
+
+    // 1. Define tu lista de canciones (CAMBIA LAS RUTAS)
+    const songList = [
+        'assets/music/ruta_1.mp3',
+        'assets/music/Red_Blue_Ending.mp3',
+        'assets/music/ruta_1.mp3',
+        'assets/music/pueblo_paleta.mp3',
+        'assets/music/Lavender.mp3'
+    ];
+
+    // 2. Selecciona los elementos del DOM
+    const audioPlayer = document.getElementById('audio-player');
+    const playPauseBtn = document.getElementById('play-pause-btn');
+    const prevTrackBtn = document.getElementById('prev-track-btn');
+    const nextTrackBtn = document.getElementById('next-track-btn');
+
+    let currentTrackIndex = 0; // Para saber qué canción está sonando
+
+    // 3. Función para cargar y reproducir una canción
+    function loadTrack(trackIndex) {
+        audioPlayer.src = songList[trackIndex];
+        audioPlayer.play();
+        playPauseBtn.classList.add('playing'); // Muestra el ícono de pausa
+    }
+
+    // 4. Lógica para el botón de Play/Pausa
+    playPauseBtn.addEventListener('click', () => {
+        if (audioPlayer.paused) {
+            audioPlayer.play();
+            playPauseBtn.classList.add('playing');
+        } else {
+            audioPlayer.pause();
+            playPauseBtn.classList.remove('playing');
+        }
+    });
+
+    // 5. Lógica para el botón de Siguiente
+    nextTrackBtn.addEventListener('click', () => {
+        currentTrackIndex = (currentTrackIndex + 1) % songList.length; // Va a la siguiente y vuelve al inicio si es la última
+        loadTrack(currentTrackIndex);
+    });
+
+    // 6. Lógica para el botón de Anterior
+    prevTrackBtn.addEventListener('click', () => {
+        currentTrackIndex = (currentTrackIndex - 1 + songList.length) % songList.length; // Va a la anterior y a la última si es la primera
+        loadTrack(currentTrackIndex);
+    });
+
+    // 7. Carga la primera canción al iniciar (pero no la reproduce)
+    audioPlayer.src = songList[currentTrackIndex];
 
     // --- LÓGICA DE CORREO ---
 
@@ -590,7 +641,8 @@ async function loadPokemonTypes() {
             submitButton.disabled = false;
             submitButton.textContent = 'Enviar';
         }
-    });
+    }
+    );
 
     // --- MANEJADORES DE EVENTOS ---
 
