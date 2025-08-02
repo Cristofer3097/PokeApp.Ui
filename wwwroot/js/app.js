@@ -39,7 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
 
     function applyFilters() {
-        pokemonList.removeEventListener('scroll', onScroll);
         const nameFilter = nameFilterInput.value.toLowerCase();
         const typeFilter = speciesFilterSelect.value;
         let filteredPokemons = allPokemonsOfGeneration;
@@ -50,9 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (typeFilter !== 'all') {
             filteredPokemons = filteredPokemons.filter(p => p.types.some(t => t.type.name === typeFilter));
         }
-        renderPokemonList(filteredPokemons);
-        alert("El filtrado en modo scroll infinito requiere una lógica más avanzada. Por ahora, se ha desactivado el scroll.");
+
+        renderPokemonList(filteredPokemons); // Filtra la lista
     }
+
+
     // Event listener que se activa al hacer clic en el panel izquierdo
     document.getElementById('left-panel').addEventListener('click', (event) => {
         // Verificamos si el elemento clickeado es una habilidad
@@ -70,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentGeneration = genNumber;
         offset = 0;
         pokemonList.innerHTML = ''; // Limpiamos la lista
+        allPokemonsOfGeneration = [];
         setupGenerationSelector();
 
         await loadMorePokemons(); // Cargamos el primer lote
@@ -89,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const data = await response.json();
             totalPokemonsInGeneration = data.totalCount;
+            allPokemonsOfGeneration.push(...data.pokemons);
 
             renderPokemonList(data.pokemons, true);
             offset += limit;
@@ -651,8 +654,8 @@ async function loadPokemonTypes() {
     clearFiltersBtn.addEventListener('click', () => {
         nameFilterInput.value = '';
         speciesFilterSelect.value = 'all';
-        applyFilters();
-        resetDetailsView();
+        loadPokemons(currentGeneration); 
+
     });
 
     exportBtn.addEventListener('click', () => {

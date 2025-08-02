@@ -708,28 +708,29 @@ body {
 
 @media (max-width: 992px) {
 
-    /* 1. Ajustamos el cuerpo y el contenedor principal */
+
     body {
-        height: auto; /* Permite que el cuerpo crezca con el contenido */
+        height: auto;
         padding: 10px 0;
     }
 
     #pokedex-container {
-        flex-direction: column; 
-        height: auto; 
+        flex-direction: column;
+        height: auto;
         width: 100%;
         padding: 15px;
         background: #dc0a2d;
+        align-items: center;
     }
 
-    /* 2. Ocultamos el logo superior */
+    
     #corner-logo {
         display: none;
     }
 
-    /* 3. Ajustamos los paneles para que ocupen todo el ancho */
+   
     #left-panel, #right-panel {
-        width: 100%;
+        width: 95%;
         max-width: 500px;
         padding: 0;
         margin: 0 0 20px 0; 
@@ -737,33 +738,57 @@ body {
     }
 
     #right-panel {
-        height: 600px; /* Le damos una altura fija al panel de la lista en móviles */
+        height: auto; 
     }
 
-    /* 4. Reposicionamos los elementos del pie de página */
-    #more-projects-container, #credits-footer {
+    #music-player {
+        position: relative; 
+        top: auto;
+        right: auto;
+        margin-top: 20px; 
+        text-align: center; 
+    }
+
+        #music-player button {
+            margin: 0 10px; 
+        }
+    #generation-buttons-container {
+        width: 95%; 
+        display: flex;
+        flex-wrap: wrap; 
+        justify-content: center; 
+        margin-bottom: 20px;
+    }
+
+        #generation-buttons-container button {
+            flex-grow: 0; 
+            margin: 5px; 
+            padding: 8px 12px; 
+            font-size: 0.8em; 
+        }
+
+    #more-projects-container {
         position: relative; 
         bottom: auto;
         left: auto;
         right: auto;
-        margin: 20px auto; 
-    }
-
-    #more-projects-container {
+        margin: 20px auto;
         width: 60%;
         max-width: 250px;
+        text-align: center; 
     }
 
     #credits-footer {
+        position: relative;
+        bottom: auto;
+        left: auto;
         width: 100%;
-        padding-left: 0; 
-        text-align: center; 
-        bottom: 10px;
+        padding: 15px; 
+        text-align: center;
+        font-size: 0.7em; 
+        margin-top: 10px; 
     }
 
-    /* 5. Ajustamos la posición del reproductor de música */
-    #music-player {
-        top: 15px;
-        right: 15px;
-    }
+  
+
 }
