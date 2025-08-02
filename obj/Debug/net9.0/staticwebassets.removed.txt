@@ -1,0 +1,4 @@
+C:\Users\Abel\Documents\Github\PokeApp.Ui\wwwroot\assets\images\button.png
+C:\Users\Abel\Documents\Github\PokeApp.Ui\wwwroot\assets\images\button1.png
+C:\Users\Abel\Documents\Github\PokeApp.Ui\wwwroot\assets\images\help_actionkey.png
+C:\Users\Abel\Documents\Github\PokeApp.Ui\wwwroot\assets\images\help_specialkey.png

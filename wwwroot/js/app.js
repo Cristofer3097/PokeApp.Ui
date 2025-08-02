@@ -1,5 +1,5 @@
 ﻿
-const apiBaseUrl = 'https://localhost:7118/api/pokemon';
+const apiBaseUrl = 'https://pokeapp-api.onrender.com/api/pokemon';
 
 document.addEventListener('DOMContentLoaded', () => {
 
