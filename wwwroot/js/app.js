@@ -466,7 +466,7 @@ tabLinks.forEach(tab => {
             indicator.id = 'loading-indicator';
             indicator.className = 'placeholder-text';
             indicator.style.justifyContent = 'center'; // Para centrar el texto
-            indicator.textContent = 'Cargando más Pokémon...';
+            indicator.textContent = 'Cargando Pokémon...';
             pokemonList.appendChild(indicator);
         }
     }
