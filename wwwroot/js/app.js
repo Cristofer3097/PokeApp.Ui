@@ -306,23 +306,7 @@ tabLinks.forEach(tab => {
              <div class="stat-value text-capitalize">${eggGroupsHtml}</div>
         </div>
     `;
-    const sendEmailBtn = document.createElement('button');
-    sendEmailBtn.className = 'btn-image-style';
-    sendEmailBtn.textContent = 'Enviar a Correo';
-    sendEmailBtn.addEventListener('click', () => {
-        const imageUrl = pokemon.sprites?.other?.['official-artwork']?.front_default || pokemon.sprites?.front_default || '';
-        const typesString = pokemon.types.map(t => t.type.name).join(', ');
-        prepareEmailModal({
-            pokemonName: pokemon.name,
-            pokemonId: pokemon.id,
-            pokemonTypes: typesString,
-            pokemonImage: imageUrl,
-            subject: `Detalles de ${pokemon.name}`
-        });
-        emailModal.show();
-    });
-    detailsButtons.innerHTML = '';
-    detailsButtons.appendChild(sendEmailBtn);
+    
     }
 
     async function loadAndRenderEvolutionsTab(pokemonId) {
