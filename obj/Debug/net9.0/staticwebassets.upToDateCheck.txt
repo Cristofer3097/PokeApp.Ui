@@ -1,12 +1,10 @@
 wwwroot\assets\images\bg.png
 wwwroot\assets\images\btn-enviar.png
-wwwroot\assets\images\button.png
-wwwroot\assets\images\button1.png
 wwwroot\assets\images\details.png
-wwwroot\assets\images\help_actionkey.png
-wwwroot\assets\images\help_specialkey.png
 wwwroot\assets\images\more-project.PNG
 wwwroot\assets\images\next.PNG
+wwwroot\assets\images\pause.png
+wwwroot\assets\images\play.png
 wwwroot\assets\images\pokedex-logo.png
 wwwroot\assets\images\prev.PNG
 wwwroot\assets\items\DAWNSTONE.png
@@ -19,6 +17,9 @@ wwwroot\assets\items\SUNSTONE.png
 wwwroot\assets\items\THUNDERSTONE.png
 wwwroot\assets\items\WATERSTONE.png
 wwwroot\assets\music\Champion_Red.mp3
+wwwroot\assets\music\Lavender.mp3
+wwwroot\assets\music\pueblo_paleta.mp3
+wwwroot\assets\music\Red_Blue_Ending.mp3
 wwwroot\assets\music\ruta_1.mp3
 wwwroot\assets\types\bug.png
 wwwroot\assets\types\dark.png
@@ -39,10 +40,10 @@ wwwroot\assets\types\psychic.png
 wwwroot\assets\types\rock.png
 wwwroot\assets\types\steel.png
 wwwroot\assets\types\water.png
+wwwroot\css\pokedex-style.css
 wwwroot\css\site.css
 wwwroot\favicon.ico
 wwwroot\index.html
-wwwroot\js\app.js
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
@@ -101,7 +102,8 @@ wwwroot\lib\jquery\dist\jquery.js
 wwwroot\lib\jquery\dist\jquery.min.js
 wwwroot\lib\jquery\dist\jquery.min.map
 wwwroot\lib\jquery\LICENSE.txt
-wwwroot\css\pokedex-style.css
+wwwroot\js\app.js
+C:\Users\Abel\Documents\Github\PokeApp.Ui\wwwroot\css\pokedex-style.css
 C:\Users\Abel\Documents\Github\PokeApp.Ui\wwwroot\css\site.css
 C:\Users\Abel\Documents\Github\PokeApp.Ui\wwwroot\favicon.ico
 C:\Users\Abel\Documents\Github\PokeApp.Ui\wwwroot\index.html
@@ -163,4 +165,3 @@ C:\Users\Abel\Documents\Github\PokeApp.Ui\wwwroot\lib\jquery\dist\jquery.min.js
 C:\Users\Abel\Documents\Github\PokeApp.Ui\wwwroot\lib\jquery\dist\jquery.min.map
 C:\Users\Abel\Documents\Github\PokeApp.Ui\wwwroot\lib\jquery\LICENSE.txt
 C:\Users\Abel\Documents\Github\PokeApp.Ui\wwwroot\js\app.js
-C:\Users\Abel\Documents\Github\PokeApp.Ui\wwwroot\css\pokedex-style.css
