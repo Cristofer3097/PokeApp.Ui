@@ -1,10 +1,6 @@
 wwwroot\assets\images\bg.png
 wwwroot\assets\images\btn-enviar.png
-wwwroot\assets\images\button.png
-wwwroot\assets\images\button1.png
 wwwroot\assets\images\details.png
-wwwroot\assets\images\help_actionkey.png
-wwwroot\assets\images\help_specialkey.png
 wwwroot\assets\images\more-project.PNG
 wwwroot\assets\images\next.PNG
 wwwroot\assets\images\pause.png
@@ -44,10 +40,10 @@ wwwroot\assets\types\psychic.png
 wwwroot\assets\types\rock.png
 wwwroot\assets\types\steel.png
 wwwroot\assets\types\water.png
-wwwroot\css\pokedex-style.css
 wwwroot\css\site.css
 wwwroot\favicon.ico
 wwwroot\index.html
+wwwroot\js\app.js
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
@@ -106,11 +102,11 @@ wwwroot\lib\jquery\dist\jquery.js
 wwwroot\lib\jquery\dist\jquery.min.js
 wwwroot\lib\jquery\dist\jquery.min.map
 wwwroot\lib\jquery\LICENSE.txt
-wwwroot\js\app.js
-C:\Users\Abel\Documents\Github\PokeApp.Ui\wwwroot\css\pokedex-style.css
+wwwroot\css\pokedex-style.css
 C:\Users\Abel\Documents\Github\PokeApp.Ui\wwwroot\css\site.css
 C:\Users\Abel\Documents\Github\PokeApp.Ui\wwwroot\favicon.ico
 C:\Users\Abel\Documents\Github\PokeApp.Ui\wwwroot\index.html
+C:\Users\Abel\Documents\Github\PokeApp.Ui\wwwroot\js\app.js
 C:\Users\Abel\Documents\Github\PokeApp.Ui\wwwroot\js\site.js
 C:\Users\Abel\Documents\Github\PokeApp.Ui\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 C:\Users\Abel\Documents\Github\PokeApp.Ui\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
@@ -168,4 +164,4 @@ C:\Users\Abel\Documents\Github\PokeApp.Ui\wwwroot\lib\jquery\dist\jquery.js
 C:\Users\Abel\Documents\Github\PokeApp.Ui\wwwroot\lib\jquery\dist\jquery.min.js
 C:\Users\Abel\Documents\Github\PokeApp.Ui\wwwroot\lib\jquery\dist\jquery.min.map
 C:\Users\Abel\Documents\Github\PokeApp.Ui\wwwroot\lib\jquery\LICENSE.txt
-C:\Users\Abel\Documents\Github\PokeApp.Ui\wwwroot\js\app.js
+C:\Users\Abel\Documents\Github\PokeApp.Ui\wwwroot\css\pokedex-style.css

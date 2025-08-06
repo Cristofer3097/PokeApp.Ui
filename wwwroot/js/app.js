@@ -331,47 +331,50 @@ tabLinks.forEach(tab => {
             const response = await fetch(`${apiBaseUrl}/evolution-chain/${pokemonId}`);
             if (!response.ok) throw new Error('Error al cargar la cadena de evolución.');
 
-            const evolutionSteps = await response.json();
-            if (!Array.isArray(evolutionSteps) || evolutionSteps.length === 0) {
-                evolutionsContent.innerHTML = '<p class="placeholder-text">Datos de evolución no disponibles.</p>';
-                return;
-            }
-            // Si el Pokémon seleccionado no es la base de la cadena (ej. eevee), lo buscamos
-            if (!Array.isArray(evolutionSteps) || evolutionSteps.length <= 1) {
+            const evolutionPaths = await response.json(); // Ahora es un array de arrays
+
+            if (!Array.isArray(evolutionPaths) || evolutionPaths.length === 0) {
                 evolutionsContent.innerHTML = '<p class="placeholder-text">Este Pokémon no tiene evoluciones.</p>';
                 return;
             }
 
             let html = '<div class="evolutions-container">';
-            evolutionSteps.forEach((step, index) => {
-                // Solo procesamos si el Pokémon y sus datos existen
-                if (step && step.pokemon) {
-                    const p = step.pokemon;
-                    const types = renderTypeBadges(p.types);
-                    
 
-                    // Renderiza la imagen y datos del Pokémon en la etapa actual
-                    html += `
+            // Iteramos sobre cada "camino" de evolución
+            evolutionPaths.forEach(path => {
+                // Cada camino es una fila horizontal
+                html += '<div class="evolution-path">';
+
+                path.forEach((step, index) => {
+                    if (step && step.pokemon) {
+                        const p = step.pokemon;
+                        const types = renderTypeBadges(p.types);
+
+                        // Renderiza la etapa actual del Pokémon
+                        html += `
                     <div class="evolution-stage">
-                        <img src="${p.sprites.front_default}" alt="${p.name}">
+                        <img src="${p.sprites.front_default || ''}" alt="${p.name}">
                         <p class="evo-name">${p.name}</p>
                         <div class="evo-types">${types}</div>
                     </div>
-                `;
+                    `;
 
-                    // Si NO es el último Pokémon, busca el REQUISITO para la SIGUIENTE evolución
-                    if (index < evolutionSteps.length - 1) {
-                        const nextStep = evolutionSteps[index + 1];
-                        if (nextStep && nextStep.evolutionDetail) {
-                            html += `<div class="evolution-arrow">
-                                    <span class="arrow-symbol">→</span>
-                                    ${renderEvolutionRequirement(nextStep.evolutionDetail)}
-                                 </div>`;
+                        // Si NO es el último, renderiza la flecha y el requisito para el SIGUIENTE
+                        if (index < path.length - 1) {
+                            const nextStep = path[index + 1];
+                            if (nextStep && nextStep.evolutionDetail) {
+                                html += `<div class="evolution-arrow">
+                                        <span class="arrow-symbol">→</span>
+                                        ${renderEvolutionRequirement(nextStep.evolutionDetail)}
+                                     </div>`;
+                            }
                         }
                     }
-                }
+                });
+                html += '</div>'; // Cierra la fila del camino
             });
-            html += '</div>';
+
+            html += '</div>'; // Cierra el contenedor principal
             evolutionsContent.innerHTML = html;
 
         } catch (error) {

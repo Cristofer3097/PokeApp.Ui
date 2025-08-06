@@ -458,6 +458,14 @@ body {
 /* --- ESTILOS PARA VENTANA DE EVOLUCIONES --- */
 .evolutions-container {
     display: flex;
+    
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+    flex-direction: column;
+}
+.evolution-path {
+    display: flex;
     justify-content: center;
     align-items: center;
     gap: 15px;
