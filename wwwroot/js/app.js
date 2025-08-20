@@ -118,7 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- MOSTRAR DETALLES ---
 
     function showDetails(pokemon) {
-        currentPokemon = pokemon;
         
         // Panel superior común
         const bwGif = pokemon.sprites?.versions?.['generation-v']?.['black-white']?.animated?.front_default;
@@ -641,8 +640,7 @@ async function loadPokemonTypes() {
     clearFiltersBtn.addEventListener('click', () => {
         nameFilterInput.value = '';
         speciesFilterSelect.value = 'all';
-        loadPokemons(currentGeneration); 
-
+        renderPokemonList(allPokemonsOfGeneration); 
     });
 
     exportBtn.addEventListener('click', () => {

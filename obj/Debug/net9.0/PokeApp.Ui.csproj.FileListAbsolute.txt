@@ -87,6 +87,6 @@ C:\Users\Abel\Documents\Github\PokeApp.Ui\obj\Debug\net9.0\refint\PokeApp.Ui.dll
 C:\Users\Abel\Documents\Github\PokeApp.Ui\obj\Debug\net9.0\PokeApp.Ui.pdb
 C:\Users\Abel\Documents\Github\PokeApp.Ui\obj\Debug\net9.0\PokeApp.Ui.genruntimeconfig.cache
 C:\Users\Abel\Documents\Github\PokeApp.Ui\obj\Debug\net9.0\ref\PokeApp.Ui.dll
-C:\Users\Abel\Documents\Github\PokeApp.Ui\obj\Debug\net9.0\compressed\thm9ju1gst-srdus2gn6u.gz
-C:\Users\Abel\Documents\Github\PokeApp.Ui\obj\Debug\net9.0\compressed\kk8mtpai22-51zxpnm6yy.gz
-C:\Users\Abel\Documents\Github\PokeApp.Ui\obj\Debug\net9.0\compressed\sgsg2gizsg-re5nj12zue.gz
+C:\Users\Abel\Documents\Github\PokeApp.Ui\obj\Debug\net9.0\compressed\kk8mtpai22-mh7cogveox.gz
+C:\Users\Abel\Documents\Github\PokeApp.Ui\obj\Debug\net9.0\compressed\thm9ju1gst-ei9lgruzom.gz
+C:\Users\Abel\Documents\Github\PokeApp.Ui\obj\Debug\net9.0\compressed\sgsg2gizsg-ihi3rs1701.gz
