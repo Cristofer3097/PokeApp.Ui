@@ -304,20 +304,8 @@ body {
     transition: transform 0.2s;
 }
 
-#pagination-container {
-    margin-top: 10px;
-}
 
-.pagination {
-    font-size: 0.7em;
-    justify-content: center;
-    --bs-pagination-active-bg: #c03028; /* Rojo para página activa */
-    --bs-pagination-active-border-color: #333;
-    --bs-pagination-color: #c03028;
-    --bs-pagination-hover-color: #c03028;
-    --bs-link-color: #c03028;
-    --bs-link-hover-color: #c03028;
-}
+
 
 /* Estilos para la cuadrícula de estadísticas */
 .stats-grid {
@@ -471,20 +459,7 @@ body {
     gap: 15px;
     text-align: center;
 }
-.evolutions-list-container {
-    display: flex;
-    flex-direction: column; /* Apila cada ruta de evolución verticalmente */
-    gap: 20px; /* Espacio entre cada línea de evolución */
-    max-height: 220px; /* Altura máxima antes de activar el scroll */
-    overflow-y: auto; /* Scroll si hay muchas evoluciones */
-    padding-right: 10px;
-}
-.evolution-path {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px; /* Espacio entre Pokémon y la flecha */
-}
+
 .evolution-stage {
     display: flex;
     flex-direction: column;
@@ -614,16 +589,7 @@ body {
     text-align: left; 
     padding-left: 5px;
 }
-.evolution-options-container {
-    display: flex;
-    flex-direction: column; /* Apila las evoluciones verticalmente */
-    gap: 15px;
-    max-height: 200px; /* Altura máxima antes de que aparezca el scroll */
-    overflow-y: auto; /* Scroll vertical si hay muchos elementos */
-    padding: 10px;
-    background-color: rgba(0,0,0,0.05);
-    border-radius: 10px;
-}
+
 /* --- ESTILOS PARA "MÁS PROYECTOS" --- */
 
 /* Contenedor posicionado en la parte inferior del marco */
